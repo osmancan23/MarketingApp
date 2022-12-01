@@ -34,6 +34,7 @@ class TextFormFieldWidget extends StatefulWidget {
   final double borderWidth;
   final Widget? suffixWidget;
   final int? maxLength;
+  final Widget? prefixWidget;
   const TextFormFieldWidget({
     Key? key,
     this.hintText,
@@ -64,6 +65,7 @@ class TextFormFieldWidget extends StatefulWidget {
     this.borderWidth = 1,
     this.suffixWidget,
     this.maxLength,
+    this.prefixWidget,
   }) : super(key: key);
 
   @override
@@ -99,6 +101,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
             errorMaxLines: 1,
             errorStyle: context.textTheme.subtitle2?.copyWith(color: Colors.red),
             suffix: widget.suffixWidget,
+            prefixIcon: widget.prefixWidget,
             hintText: widget.hintText,
             labelText: widget.labelText,
             prefixIconColor: widget.prefixIconColor,

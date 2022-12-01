@@ -36,7 +36,7 @@ class CustomScaffold extends StatelessWidget {
               title: appbarTitle,
             )
           : null,
-      backgroundColor: ColorConstants.instance?.cadetBlue,
+      backgroundColor: ColorConstants.instance?.alabaster,
       body: Padding(
         padding: padding ??
             EdgeInsets.symmetric(
