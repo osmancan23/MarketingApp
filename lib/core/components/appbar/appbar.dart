@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:kartal/kartal.dart';
+import 'package:marketing_app/core/constants/app/color_constants.dart';
 
 import '../text/custom_text.dart';
 
@@ -10,16 +12,42 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: IconButton(
-        onPressed: () => context.router.pop(),
-        icon: const Icon(
-          Icons.arrow_back_ios_new_outlined,
-          size: 20,
-        ),
-      ),
+      backgroundColor: ColorConstants.instance?.alabaster,
+      elevation: 0,
+      leading: _leadinIconButton(context),
       actions: actions,
-      title: CustomText(title),
+      centerTitle: true,
+      title: CustomText(
+        title,
+        textStyle: context.textTheme.headline5?.copyWith(color: ColorConstants.instance?.mainColor, fontWeight: FontWeight.w600),
+      ),
     );
+  }
+
+  IconButton _leadinIconButton(BuildContext context) {
+    return IconButton(
+        onPressed: () => context.router.pop(),
+        icon: Container(
+          width: 70,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          child: Icon(
+            Icons.arrow_back,
+            size: 30,
+            color: ColorConstants.instance?.mainColor,
+          ),
+        ));
   }
 
   @override

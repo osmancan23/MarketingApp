@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:kartal/kartal.dart';
 
 class CustomText extends StatelessWidget {
   final String? text;
@@ -15,7 +15,7 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoSizeText(
       text ?? "",
-      style: GoogleFonts.nunito(textStyle: textStyle),
+      style: textStyle ?? context.textTheme.headline6?.copyWith(fontWeight: FontWeight.normal),
       textAlign: textAlign,
       maxLines: maxLines,
       maxFontSize: maxFontSize ?? double.infinity,

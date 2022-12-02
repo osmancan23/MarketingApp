@@ -4,6 +4,7 @@ import 'package:marketing_app/view/discover/discover_view.dart';
 import 'package:marketing_app/view/favorites/favorites_view.dart';
 import 'package:marketing_app/view/home/home_view.dart';
 import 'package:marketing_app/view/main_view.dart';
+import 'package:marketing_app/view/product/searchProduct/search_product_view.dart';
 
 // @CupertinoAutoRouter
 // @AdaptiveAutoRouter
@@ -16,7 +17,8 @@ import 'package:marketing_app/view/main_view.dart';
       AutoRoute(path: "basket", page: BasketView),
       AutoRoute(path: "discover", page: DiscoverView),
       AutoRoute(path: "favorites", page: FavoritesView),
-    ])
+    ]),
+    AutoRoute(path: "search", page: SearchProductView),
   ],
 )
 class $AppRouter {}
