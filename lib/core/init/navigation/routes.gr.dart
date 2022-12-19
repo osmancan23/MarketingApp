@@ -11,32 +11,32 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i7;
-import 'package:flutter/cupertino.dart' as _i9;
-import 'package:flutter/material.dart' as _i8;
+import 'package:auto_route/auto_route.dart' as _i8;
+import 'package:flutter/material.dart' as _i9;
 
-import '../../../view/basket/basket_view.dart' as _i4;
-import '../../../view/discover/discover_view.dart' as _i5;
-import '../../../view/favorites/favorites_view.dart' as _i6;
-import '../../../view/home/home_view.dart' as _i3;
+import '../../../view/basket/basket_view.dart' as _i5;
+import '../../../view/discover/discover_view.dart' as _i6;
+import '../../../view/favorites/favorites_view.dart' as _i7;
+import '../../../view/home/home_view.dart' as _i4;
 import '../../../view/main_view.dart' as _i1;
+import '../../../view/product/productDetail/product_detail_view.dart' as _i3;
 import '../../../view/product/searchProduct/search_product_view.dart' as _i2;
 
-class AppRouter extends _i7.RootStackRouter {
-  AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])
+class AppRouter extends _i8.RootStackRouter {
+  AppRouter([_i9.GlobalKey<_i9.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i7.PageFactory> pagesMap = {
+  final Map<String, _i8.PageFactory> pagesMap = {
     MainRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.MainView(),
       );
     },
     SearchProductRoute.name: (routeData) {
       final args = routeData.argsAs<SearchProductRouteArgs>();
-      return _i7.MaterialPageX<dynamic>(
+      return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i2.SearchProductView(
           key: args.key,
@@ -44,71 +44,81 @@ class AppRouter extends _i7.RootStackRouter {
         ),
       );
     },
-    HomeRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+    ProductDetailRoute.name: (routeData) {
+      return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i3.HomeView(),
+        child: const _i3.ProductDetailView(),
+      );
+    },
+    HomeRoute.name: (routeData) {
+      return _i8.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i4.HomeView(),
       );
     },
     BasketRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i4.BasketView(),
+        child: const _i5.BasketView(),
       );
     },
     DiscoverRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i5.DiscoverView(),
+        child: const _i6.DiscoverView(),
       );
     },
     FavoritesRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i6.FavoritesView(),
+        child: const _i7.FavoritesView(),
       );
     },
   };
 
   @override
-  List<_i7.RouteConfig> get routes => [
-        _i7.RouteConfig(
+  List<_i8.RouteConfig> get routes => [
+        _i8.RouteConfig(
           MainRoute.name,
           path: '/',
           children: [
-            _i7.RouteConfig(
+            _i8.RouteConfig(
               HomeRoute.name,
               path: 'home',
               parent: MainRoute.name,
             ),
-            _i7.RouteConfig(
+            _i8.RouteConfig(
               BasketRoute.name,
               path: 'basket',
               parent: MainRoute.name,
             ),
-            _i7.RouteConfig(
+            _i8.RouteConfig(
               DiscoverRoute.name,
               path: 'discover',
               parent: MainRoute.name,
             ),
-            _i7.RouteConfig(
+            _i8.RouteConfig(
               FavoritesRoute.name,
               path: 'favorites',
               parent: MainRoute.name,
             ),
           ],
         ),
-        _i7.RouteConfig(
+        _i8.RouteConfig(
           SearchProductRoute.name,
           path: 'search',
+        ),
+        _i8.RouteConfig(
+          ProductDetailRoute.name,
+          path: 'product-detail',
         ),
       ];
 }
 
 /// generated route for
 /// [_i1.MainView]
-class MainRoute extends _i7.PageRouteInfo<void> {
-  const MainRoute({List<_i7.PageRouteInfo>? children})
+class MainRoute extends _i8.PageRouteInfo<void> {
+  const MainRoute({List<_i8.PageRouteInfo>? children})
       : super(
           MainRoute.name,
           path: '/',
@@ -120,7 +130,7 @@ class MainRoute extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.SearchProductView]
-class SearchProductRoute extends _i7.PageRouteInfo<SearchProductRouteArgs> {
+class SearchProductRoute extends _i8.PageRouteInfo<SearchProductRouteArgs> {
   SearchProductRoute({
     _i9.Key? key,
     required String searchKey,
@@ -153,8 +163,20 @@ class SearchProductRouteArgs {
 }
 
 /// generated route for
-/// [_i3.HomeView]
-class HomeRoute extends _i7.PageRouteInfo<void> {
+/// [_i3.ProductDetailView]
+class ProductDetailRoute extends _i8.PageRouteInfo<void> {
+  const ProductDetailRoute()
+      : super(
+          ProductDetailRoute.name,
+          path: 'product-detail',
+        );
+
+  static const String name = 'ProductDetailRoute';
+}
+
+/// generated route for
+/// [_i4.HomeView]
+class HomeRoute extends _i8.PageRouteInfo<void> {
   const HomeRoute()
       : super(
           HomeRoute.name,
@@ -165,8 +187,8 @@ class HomeRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.BasketView]
-class BasketRoute extends _i7.PageRouteInfo<void> {
+/// [_i5.BasketView]
+class BasketRoute extends _i8.PageRouteInfo<void> {
   const BasketRoute()
       : super(
           BasketRoute.name,
@@ -177,8 +199,8 @@ class BasketRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.DiscoverView]
-class DiscoverRoute extends _i7.PageRouteInfo<void> {
+/// [_i6.DiscoverView]
+class DiscoverRoute extends _i8.PageRouteInfo<void> {
   const DiscoverRoute()
       : super(
           DiscoverRoute.name,
@@ -189,8 +211,8 @@ class DiscoverRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.FavoritesView]
-class FavoritesRoute extends _i7.PageRouteInfo<void> {
+/// [_i7.FavoritesView]
+class FavoritesRoute extends _i8.PageRouteInfo<void> {
   const FavoritesRoute()
       : super(
           FavoritesRoute.name,

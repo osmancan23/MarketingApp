@@ -27,6 +27,7 @@ dependencies:
   auto_size_text: ^3.0.0
   salomon_bottom_bar: ^3.3.1
   font_awesome_flutter: ^10.2.1
+  flutter_slidable: ^2.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

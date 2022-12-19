@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:marketing_app/core/components/text/custom_text.dart';
-
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+
+import '../text/custom_text.dart';
 
 class BottomNavbarWidget extends StatefulWidget {
   const BottomNavbarWidget({super.key, required this.onChange});
@@ -26,27 +26,27 @@ class _BottomNavbarWidgetState extends State<BottomNavbarWidget> {
         /// Home
         SalomonBottomBarItem(
           icon: const FaIcon(FontAwesomeIcons.house),
-          title: const CustomText("Ana Sayfa"),
+          title: const CustomText("Home"),
           selectedColor: Colors.purple,
         ),
 
         /// Likes
         SalomonBottomBarItem(
           icon: const FaIcon(FontAwesomeIcons.magnifyingGlass),
-          title: const CustomText("Keşfet"),
+          title: const CustomText("Discover"),
         ),
 
         /// Search
         SalomonBottomBarItem(
           icon: const Icon(FontAwesomeIcons.heart),
-          title: const CustomText("Favorilerim"),
+          title: const CustomText("Favorites"),
           selectedColor: Colors.pink,
         ),
 
         /// Profile
         SalomonBottomBarItem(
           icon: const Icon(FontAwesomeIcons.cartShopping),
-          title: const CustomText("Sepet"),
+          title: const CustomText("Basket"),
           selectedColor: Colors.teal,
         ),
       ],

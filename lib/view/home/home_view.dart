@@ -2,17 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kartal/kartal.dart';
-import 'package:marketing_app/core/components/bottomBar/bottom_navbar.dart';
-import 'package:marketing_app/core/components/productCard/product_card.dart';
-import 'package:marketing_app/core/components/scaffold/scaffold.dart';
-import 'package:marketing_app/core/components/tabbar/tabbar.dart';
-import 'package:marketing_app/core/components/text/custom_text.dart';
-import 'package:marketing_app/core/constants/app/color_constants.dart';
-import 'package:marketing_app/core/extensions/num_extensions.dart';
-import 'package:marketing_app/core/init/navigation/routes.gr.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../core/components/small_product_card.dart';
+import '../../core/components/tabbar/tabbar.dart';
+import '../../core/components/text/custom_text.dart';
 import '../../core/components/textFormField/text_form_field_widget.dart';
+import '../../core/constants/app/color_constants.dart';
+import '../../core/extensions/num_extensions.dart';
+import '../../core/init/navigation/routes.gr.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -36,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        2.h.ph,
+        8.h.ph,
         _searchField(context),
         2.h.ph,
         Row(
@@ -103,14 +101,17 @@ class _HomeViewState extends State<HomeView> {
         padding: context.paddingLow,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisExtent: 170,
+          mainAxisExtent: 200,
           mainAxisSpacing: 10,
           crossAxisSpacing: 20,
         ),
         shrinkWrap: true,
         itemCount: 10,
         itemBuilder: (BuildContext context, int index) {
-          return const ProductCardWidget();
+          return const SmallProductCard(
+            title: "deneme",
+            price: 20,
+          );
         },
       ),
     );

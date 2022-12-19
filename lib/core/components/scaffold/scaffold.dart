@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import '../appbar/appbar.dart';
 
 import '../../constants/app/color_constants.dart';
 import '../../extensions/num_extensions.dart';
+import '../appbar/appbar.dart';
 
 class CustomScaffold extends StatelessWidget {
   final bool isThereAppbar;
@@ -49,7 +49,7 @@ class CustomScaffold extends StatelessWidget {
                   ? 0.ph
                   : isNoPaddingTop
                       ? 0.ph
-                      : 7.h.ph,
+                      : 1.h.ph,
               body,
               1.h.ph,
             ],

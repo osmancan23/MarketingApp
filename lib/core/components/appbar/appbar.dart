@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
-import 'package:marketing_app/core/constants/app/color_constants.dart';
 
+import '../../constants/app/color_constants.dart';
 import '../text/custom_text.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {

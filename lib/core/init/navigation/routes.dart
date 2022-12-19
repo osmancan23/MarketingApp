@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:marketing_app/view/basket/basket_view.dart';
-import 'package:marketing_app/view/discover/discover_view.dart';
-import 'package:marketing_app/view/favorites/favorites_view.dart';
-import 'package:marketing_app/view/home/home_view.dart';
-import 'package:marketing_app/view/main_view.dart';
-import 'package:marketing_app/view/product/searchProduct/search_product_view.dart';
+
+import '../../../view/basket/basket_view.dart';
+import '../../../view/discover/discover_view.dart';
+import '../../../view/favorites/favorites_view.dart';
+import '../../../view/home/home_view.dart';
+import '../../../view/main_view.dart';
+import '../../../view/product/productDetail/product_detail_view.dart';
+import '../../../view/product/searchProduct/search_product_view.dart';
 
 // @CupertinoAutoRouter
 // @AdaptiveAutoRouter
@@ -19,6 +21,7 @@ import 'package:marketing_app/view/product/searchProduct/search_product_view.dar
       AutoRoute(path: "favorites", page: FavoritesView),
     ]),
     AutoRoute(path: "search", page: SearchProductView),
+    AutoRoute(path: "product-detail", page: ProductDetailView),
   ],
 )
 class $AppRouter {}
