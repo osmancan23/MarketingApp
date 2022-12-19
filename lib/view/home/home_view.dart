@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../core/components/small_product_card.dart';
+import '../../core/components/productCard/product_card.dart';
 import '../../core/components/tabbar/tabbar.dart';
 import '../../core/components/text/custom_text.dart';
 import '../../core/components/textFormField/text_form_field_widget.dart';
@@ -108,7 +108,7 @@ class _HomeViewState extends State<HomeView> {
         shrinkWrap: true,
         itemCount: 10,
         itemBuilder: (BuildContext context, int index) {
-          return const SmallProductCard(
+          return const ProductCardWidget(
             title: "deneme",
             price: 20,
           );
