@@ -1,30 +1,71 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../core/components/text/custom_text.dart';
+import '../../../core/constants/app/color_constants.dart';
+import '../../../core/init/navigation/routes.gr.dart';
 
 class CategoryBoxWidget extends StatelessWidget {
-  const CategoryBoxWidget({super.key});
+  const CategoryBoxWidget({super.key, required this.name});
+  final String name;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-          width: context.dynamicWidth(0.9),
-          height: context.dynamicHeight(0.15),
-          decoration: BoxDecoration(color: Colors.red, borderRadius: context.lowBorderRadius),
-          child: Stack(
-            children: [
-              SizedBox(
-                width: context.dynamicWidth(0.9),
-                child: ClipRRect(
-                  borderRadius: context.lowBorderRadius,
-                  child: Image.network("".randomImage, fit: BoxFit.fitWidth),
+    return InkWell(
+      onTap: () => context.router.push(SearchProductRoute(word: name.toLowerCase(), isCategoryName: true)),
+      child: Center(
+        child: Container(
+            width: context.dynamicWidth(0.9),
+            height: context.dynamicHeight(0.15),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: context.lowBorderRadius,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3), // changes position of shadow
                 ),
+              ],
+            ),
+            child: Padding(
+              padding: context.paddingLow,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                    name,
+                    textStyle: context.textTheme.headline6?.copyWith(color: ColorConstants.instance?.mainColor),
+                  ),
+                  SizedBox(
+                    width: 150,
+                    height: 200,
+                    child: Lottie.asset("assets/lottie/${checkLottiePath(name)}-lottie.json", fit: BoxFit.fill),
+                  ),
+                ],
               ),
-              CustomText("KATEGORI")
-            ],
-          )),
+            )),
+      ),
     );
+  }
+}
+
+String checkLottiePath(String categoryName) {
+  switch (categoryName) {
+    case "Automotive":
+      return "automotive";
+    case "Furniture":
+      return "furniture";
+    case "Laptops":
+      return "laptop";
+    case "Skincare":
+      return "skincare";
+    case "Smartphones":
+      return "smartphone";
+    default:
+      return "sunglasses";
   }
 }

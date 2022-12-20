@@ -1,16 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../core/base/bloc/product_bloc.dart';
+import '../../core/base/service/product_service.dart';
 import '../../core/components/productCard/product_card.dart';
-import '../../core/components/tabbar/tabbar.dart';
 import '../../core/components/text/custom_text.dart';
 import '../../core/components/textFormField/text_form_field_widget.dart';
 import '../../core/constants/app/color_constants.dart';
 import '../../core/extensions/num_extensions.dart';
 import '../../core/init/navigation/routes.gr.dart';
+import '../../core/init/network/network_manager.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -21,9 +24,11 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   TextEditingController _searchKeyController = TextEditingController();
-
+  late ProductBloc productBloc;
   @override
   void initState() {
+    productBloc = ProductBloc(ProductService(VexanaManager()));
+    productBloc.add(FetchAllProducts());
     _searchKeyController.addListener(() {
       setState(() {});
     });
@@ -40,14 +45,11 @@ class _HomeViewState extends State<HomeView> {
         Row(
           children: [
             CustomText(
-              "Explore",
+              "Top Products",
               textStyle: context.textTheme.headline5?.copyWith(color: ColorConstants.instance?.mainColor, fontWeight: FontWeight.w800),
             ),
           ],
         ),
-        1.h.ph,
-        _productListView(context),
-        TabbarWidget(onChange: (inde) {}),
         1.h.ph,
         _productGridView(context),
       ],
@@ -72,12 +74,13 @@ class _HomeViewState extends State<HomeView> {
         _searchKeyController.text.isEmpty
             ? IconButton(onPressed: () => context.router.push(const BasketRoute()), icon: const FaIcon(FontAwesomeIcons.cartShopping))
             : IconButton(
-                onPressed: () => context.router.push(SearchProductRoute(searchKey: _searchKeyController.text)),
+                onPressed: () => context.router.push(SearchProductRoute(word: _searchKeyController.text)),
                 icon: const FaIcon(FontAwesomeIcons.magnifyingGlass)),
       ],
     );
   }
 
+/*
   SizedBox _productListView(BuildContext context) {
     return SizedBox(
       height: context.dynamicHeight(0.15),
@@ -91,27 +94,36 @@ class _HomeViewState extends State<HomeView> {
       ),
     );
   }
-
-  Container _productGridView(BuildContext context) {
+*/
+  Widget _productGridView(BuildContext context) {
     return Container(
       color: Colors.transparent,
       width: context.dynamicWidth(1),
-      height: context.dynamicHeight(0.4),
-      child: GridView.builder(
-        padding: context.paddingLow,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisExtent: 200,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 20,
-        ),
-        shrinkWrap: true,
-        itemCount: 10,
-        itemBuilder: (BuildContext context, int index) {
-          return const ProductCardWidget(
-            title: "deneme",
-            price: 20,
-          );
+      child: BlocBuilder<ProductBloc, ProductState>(
+        bloc: productBloc,
+        builder: (context, state) {
+          if (state is ProductsLoaded) {
+            return GridView.builder(
+              padding: context.paddingLow,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisExtent: 230,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 20,
+              ),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: state.productList.length,
+              itemBuilder: (BuildContext context, int index) {
+                var item = state.productList[index];
+                return ProductCardWidget(productModel: item);
+              },
+            );
+          } else if (state is ProductsLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            return CustomText(state.toString());
+          }
         },
       ),
     );

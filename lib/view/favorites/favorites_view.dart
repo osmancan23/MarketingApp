@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import '../../core/base/model/product_model.dart';
 import '../../core/components/appbar/appbar.dart';
 import '../../core/components/productCard/product_card.dart';
 
@@ -19,8 +20,7 @@ class FavoritesView extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             // ignore: prefer_const_constructors
             return ProductCardWidget(
-              title: "Deneme",
-              price: 250,
+              productModel: ProductModel(title: "dENEME", images: ["https://i.dummyjson.com/data/products/61/1.jpg"]),
             );
           },
         ),

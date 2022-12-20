@@ -1,6 +1,6 @@
 import 'package:vexana/vexana.dart';
 
-import '../base/model/product_model.dart';
+import '../model/product_model.dart';
 
 abstract class IProductService {
   final INetworkManager networkManager;

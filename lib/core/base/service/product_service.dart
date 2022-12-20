@@ -1,7 +1,7 @@
 import 'package:vexana/vexana.dart';
 
-import '../base/model/product_model.dart';
-import '../base/model/result_model.dart';
+import '../model/product_model.dart';
+import '../model/result_model.dart';
 import 'i_product_service.dart';
 
 class ProductService extends IProductService {

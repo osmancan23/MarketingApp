@@ -21,6 +21,7 @@ import '../../../view/home/home_view.dart' as _i4;
 import '../../../view/main_view.dart' as _i1;
 import '../../../view/product/productDetail/product_detail_view.dart' as _i3;
 import '../../../view/product/searchProduct/search_product_view.dart' as _i2;
+import '../../base/model/product_model.dart' as _i10;
 
 class AppRouter extends _i8.RootStackRouter {
   AppRouter([_i9.GlobalKey<_i9.NavigatorState>? navigatorKey])
@@ -40,14 +41,19 @@ class AppRouter extends _i8.RootStackRouter {
         routeData: routeData,
         child: _i2.SearchProductView(
           key: args.key,
-          searchKey: args.searchKey,
+          word: args.word,
+          isCategoryName: args.isCategoryName,
         ),
       );
     },
     ProductDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<ProductDetailRouteArgs>();
       return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i3.ProductDetailView(),
+        child: _i3.ProductDetailView(
+          key: args.key,
+          productModel: args.productModel,
+        ),
       );
     },
     HomeRoute.name: (routeData) {
@@ -63,9 +69,11 @@ class AppRouter extends _i8.RootStackRouter {
       );
     },
     DiscoverRoute.name: (routeData) {
+      final args = routeData.argsAs<DiscoverRouteArgs>(
+          orElse: () => const DiscoverRouteArgs());
       return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i6.DiscoverView(),
+        child: _i6.DiscoverView(key: args.key),
       );
     },
     FavoritesRoute.name: (routeData) {
@@ -133,13 +141,15 @@ class MainRoute extends _i8.PageRouteInfo<void> {
 class SearchProductRoute extends _i8.PageRouteInfo<SearchProductRouteArgs> {
   SearchProductRoute({
     _i9.Key? key,
-    required String searchKey,
+    required String word,
+    bool isCategoryName = false,
   }) : super(
           SearchProductRoute.name,
           path: 'search',
           args: SearchProductRouteArgs(
             key: key,
-            searchKey: searchKey,
+            word: word,
+            isCategoryName: isCategoryName,
           ),
         );
 
@@ -149,29 +159,54 @@ class SearchProductRoute extends _i8.PageRouteInfo<SearchProductRouteArgs> {
 class SearchProductRouteArgs {
   const SearchProductRouteArgs({
     this.key,
-    required this.searchKey,
+    required this.word,
+    this.isCategoryName = false,
   });
 
   final _i9.Key? key;
 
-  final String searchKey;
+  final String word;
+
+  final bool isCategoryName;
 
   @override
   String toString() {
-    return 'SearchProductRouteArgs{key: $key, searchKey: $searchKey}';
+    return 'SearchProductRouteArgs{key: $key, word: $word, isCategoryName: $isCategoryName}';
   }
 }
 
 /// generated route for
 /// [_i3.ProductDetailView]
-class ProductDetailRoute extends _i8.PageRouteInfo<void> {
-  const ProductDetailRoute()
-      : super(
+class ProductDetailRoute extends _i8.PageRouteInfo<ProductDetailRouteArgs> {
+  ProductDetailRoute({
+    _i9.Key? key,
+    required _i10.ProductModel productModel,
+  }) : super(
           ProductDetailRoute.name,
           path: 'product-detail',
+          args: ProductDetailRouteArgs(
+            key: key,
+            productModel: productModel,
+          ),
         );
 
   static const String name = 'ProductDetailRoute';
+}
+
+class ProductDetailRouteArgs {
+  const ProductDetailRouteArgs({
+    this.key,
+    required this.productModel,
+  });
+
+  final _i9.Key? key;
+
+  final _i10.ProductModel productModel;
+
+  @override
+  String toString() {
+    return 'ProductDetailRouteArgs{key: $key, productModel: $productModel}';
+  }
 }
 
 /// generated route for
@@ -200,14 +235,26 @@ class BasketRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.DiscoverView]
-class DiscoverRoute extends _i8.PageRouteInfo<void> {
-  const DiscoverRoute()
+class DiscoverRoute extends _i8.PageRouteInfo<DiscoverRouteArgs> {
+  DiscoverRoute({_i9.Key? key})
       : super(
           DiscoverRoute.name,
           path: 'discover',
+          args: DiscoverRouteArgs(key: key),
         );
 
   static const String name = 'DiscoverRoute';
+}
+
+class DiscoverRouteArgs {
+  const DiscoverRouteArgs({this.key});
+
+  final _i9.Key? key;
+
+  @override
+  String toString() {
+    return 'DiscoverRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:marketing_app/core/components/scaffold/scaffold.dart';
-import 'package:marketing_app/view/basket/basket_view.dart';
-import 'package:marketing_app/view/discover/discover_view.dart';
-import 'package:marketing_app/view/favorites/favorites_view.dart';
-import 'package:marketing_app/view/home/home_view.dart';
 
 import '../core/components/bottomBar/bottom_navbar.dart';
+import '../core/components/scaffold/scaffold.dart';
+import 'basket/basket_view.dart';
+import 'discover/discover_view.dart';
+import 'favorites/favorites_view.dart';
+import 'home/home_view.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -18,7 +17,7 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   int _currentIndex = 0;
-  final List<Widget> _pagesList = const [HomeView(), DiscoverView(), FavoritesView(), BasketView()];
+  final List<Widget> _pagesList = [const HomeView(), DiscoverView(), const FavoritesView(), const BasketView()];
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(

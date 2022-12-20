@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:marketing_app/core/init/network/network_manager.dart';
-import 'package:marketing_app/core/service/i_product_service.dart';
-import 'package:marketing_app/core/service/product_service.dart';
+import 'package:marketing_app/core/base/service/i_product_service.dart';
+import 'package:marketing_app/core/base/service/product_service.dart';
 
 void main() {
   late IProductService productService;

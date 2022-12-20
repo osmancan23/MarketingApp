@@ -30,6 +30,8 @@ dependencies:
   flutter_slidable: ^2.0.0
   flutter_image_slider: ^0.0.2
   flutter_image_slideshow: ^0.1.4
+  flutter_bloc: ^8.1.1
+  lottie: ^1.4.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -38,3 +40,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/lottie/

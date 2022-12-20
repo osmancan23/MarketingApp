@@ -3,25 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../base/functions/base_functions.dart';
+import '../../base/model/product_model.dart';
 import '../../constants/app/color_constants.dart';
 import '../../extensions/num_extensions.dart';
 import '../../init/navigation/routes.gr.dart';
 import '../text/custom_text.dart';
 
 class ProductCardWidget extends StatefulWidget {
-  final String? image;
-  final String? title;
-  final String? sellerName;
-  final double? price;
-  final void Function()? onClick;
-  final bool? isFavoriteView;
-  // final ProductModel? productModel;
+  final ProductModel? productModel;
 
-  final double? padding;
-
-  const ProductCardWidget(
-      {Key? key, this.image, this.title, this.sellerName, this.price, this.onClick, this.padding = 4, this.isFavoriteView = false})
-      : super(key: key);
+  const ProductCardWidget({Key? key, this.productModel}) : super(key: key);
 
   @override
   State<ProductCardWidget> createState() => _ProductCardWidgetState();
@@ -33,7 +25,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.router.push(const ProductDetailRoute()),
+      onTap: () => context.router.push(ProductDetailRoute(productModel: widget.productModel!)),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -58,7 +50,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                   child: ClipRRect(
                     borderRadius: context.lowBorderRadius,
                     child: Image.network(
-                      "".randomImage,
+                      widget.productModel!.images!.first,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -94,12 +86,16 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
             ),
             1.h.ph,
             CustomText(
-              widget.title!,
-              textStyle: context.textTheme.headline6!.copyWith(color: ColorConstants.instance?.mainColor, fontWeight: FontWeight.w500),
+              BaseFunctions.instance?.toShortString(widget.productModel?.title!, countCharacter: 16),
+              textStyle: context.textTheme.headline6!.copyWith(
+                color: ColorConstants.instance?.mainColor,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
             ),
             0.1.h.ph,
             CustomText(
-              '₺${widget.price}',
+              '₺${widget.productModel?.price}',
               textStyle: context.textTheme.headline6?.copyWith(color: ColorConstants.instance?.mainColor),
             ),
             0.1.h.ph,

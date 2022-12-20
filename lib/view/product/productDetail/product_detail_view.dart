@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../core/base/model/product_model.dart';
 import '../../../core/components/appbar/appbar.dart';
 import '../../../core/components/button/button.dart';
 import '../../../core/components/text/custom_text.dart';
@@ -11,8 +12,8 @@ import '../../../core/extensions/num_extensions.dart';
 import 'widget/image_slider.dart';
 
 class ProductDetailView extends StatelessWidget {
-  const ProductDetailView({super.key});
-
+  const ProductDetailView({super.key, required this.productModel});
+  final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +25,7 @@ class ProductDetailView extends StatelessWidget {
             children: [
               5.h.ph,
               ImageSlideWidget(
-                images: ["https://i.dummyjson.com/data/products/100/1.jpg", "https://i.dummyjson.com/data/products/100/2.jpg"],
+                images: productModel.images ?? [],
               ),
               4.h.ph,
               Padding(
@@ -35,7 +36,7 @@ class ProductDetailView extends StatelessWidget {
                     Row(
                       children: [
                         CustomText(
-                          "Title",
+                          productModel.title,
                           textStyle: context.textTheme.headline4?.copyWith(color: ColorConstants.instance?.mainColor),
                         ),
                       ],
@@ -46,7 +47,7 @@ class ProductDetailView extends StatelessWidget {
                         SizedBox(
                           width: context.dynamicWidth(0.9),
                           child: CustomText(
-                            "adssdaasdsdaddddddddaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaaaaaaaaa",
+                            productModel.description,
                             maxLines: 3,
                             textStyle: context.textTheme.headline6?.copyWith(color: ColorConstants.instance?.cadetBlue),
                           ),
@@ -59,7 +60,7 @@ class ProductDetailView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         CustomText(
-                          "250 TL",
+                          productModel.price.toString(),
                           textStyle: context.textTheme.headline5?.copyWith(color: ColorConstants.instance?.mainColor, fontWeight: FontWeight.w700),
                         ),
                       ],
