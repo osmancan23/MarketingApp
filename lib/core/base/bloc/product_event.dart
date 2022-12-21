@@ -16,3 +16,14 @@ class FetchProductByCategory extends ProductEvent {
 
   FetchProductByCategory(this.categoryName);
 }
+
+class FetchAllFavoritesProducts extends ProductEvent {}
+
+class FetchAllBasketProducts extends ProductEvent {}
+
+
+class RemoveProductFromBasket extends ProductEvent{
+  final String productId;
+
+  RemoveProductFromBasket(this.productId);
+}

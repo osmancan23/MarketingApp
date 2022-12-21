@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../core/base/functions/base_functions.dart';
 import '../../../core/base/model/product_model.dart';
 import '../../../core/components/appbar/appbar.dart';
 import '../../../core/components/button/button.dart';
@@ -60,7 +60,7 @@ class ProductDetailView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         CustomText(
-                          productModel.price.toString(),
+                          '\$${productModel.price.toString()}',
                           textStyle: context.textTheme.headline5?.copyWith(color: ColorConstants.instance?.mainColor, fontWeight: FontWeight.w700),
                         ),
                       ],
@@ -69,9 +69,13 @@ class ProductDetailView extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        IconButton(onPressed: () {}, icon: const Icon(FontAwesomeIcons.heart)),
                         ButtonWidget(
-                          onTap: () {},
+                          onTap: () async {
+                            BaseFunctions.instance?.addOrRemoveProductListLocaleStorage(context,
+                              key: "basket",
+                              productId: productModel.id.toString(),
+                            );
+                          },
                           text: "Add To Basket",
                           buttonColor: ColorConstants.instance?.mainColor,
                           width: 0.5,

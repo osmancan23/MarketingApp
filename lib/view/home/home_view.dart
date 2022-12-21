@@ -6,14 +6,12 @@ import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/base/bloc/product_bloc.dart';
-import '../../core/base/service/product_service.dart';
 import '../../core/components/productCard/product_card.dart';
 import '../../core/components/text/custom_text.dart';
 import '../../core/components/textFormField/text_form_field_widget.dart';
 import '../../core/constants/app/color_constants.dart';
 import '../../core/extensions/num_extensions.dart';
 import '../../core/init/navigation/routes.gr.dart';
-import '../../core/init/network/network_manager.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -27,8 +25,7 @@ class _HomeViewState extends State<HomeView> {
   late ProductBloc productBloc;
   @override
   void initState() {
-    productBloc = ProductBloc(ProductService(VexanaManager()));
-    productBloc.add(FetchAllProducts());
+    productBloc = context.read<ProductBloc>();
     _searchKeyController.addListener(() {
       setState(() {});
     });

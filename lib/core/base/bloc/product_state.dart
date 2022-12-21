@@ -18,3 +18,12 @@ class ProductLoadError extends ProductState {
 
   ProductLoadError(this.errorMessage);
 }
+
+class UpdatedBasket extends ProductState{}
+
+class UpdateBasketError extends ProductState {
+   final String errorMessage;
+
+  UpdateBasketError(this.errorMessage);
+
+}

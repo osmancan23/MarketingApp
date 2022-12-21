@@ -7,6 +7,7 @@ import '../../base/functions/base_functions.dart';
 import '../../base/model/product_model.dart';
 import '../../constants/app/color_constants.dart';
 import '../../extensions/num_extensions.dart';
+import '../../init/locale_storage/locale_storage_manager.dart';
 import '../../init/navigation/routes.gr.dart';
 import '../text/custom_text.dart';
 
@@ -21,6 +22,17 @@ class ProductCardWidget extends StatefulWidget {
 
 class _ProductCardWidgetState extends State<ProductCardWidget> {
   bool isLike = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      var favorites = await LocalStorageManager.getStringList("favorites");
+
+      isLike = favorites!.contains(widget.productModel!.id.toString());
+      setState(() {});
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +90,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         setState(() {
                           isLike = !isLike;
                         });
+                        BaseFunctions.instance?.addOrRemoveProductListLocaleStorage(
+                          context,
+                          key: "favorites",
+                          productId: widget.productModel!.id.toString(),
+                        );
                       },
                     ),
                   ),
@@ -95,7 +112,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
             ),
             0.1.h.ph,
             CustomText(
-              '₺${widget.productModel?.price}',
+              '\$${widget.productModel?.price}',
               textStyle: context.textTheme.headline6?.copyWith(color: ColorConstants.instance?.mainColor),
             ),
             0.1.h.ph,

@@ -7,6 +7,7 @@ import '../../../view/home/home_view.dart';
 import '../../../view/main_view.dart';
 import '../../../view/product/productDetail/product_detail_view.dart';
 import '../../../view/product/searchProduct/search_product_view.dart';
+import '../../../view/splash/splash_view.dart';
 
 // @CupertinoAutoRouter
 // @AdaptiveAutoRouter
@@ -14,7 +15,8 @@ import '../../../view/product/searchProduct/search_product_view.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page|View|Screen,Route',
   routes: <AutoRoute>[
-    AutoRoute(path: "/", page: MainView, initial: true, children: [
+    AutoRoute(path: "/", page: SplashView, initial: true),
+    AutoRoute(path: "", page: MainView, children: [
       AutoRoute(path: "home", page: HomeView),
       AutoRoute(path: "basket", page: BasketView),
       AutoRoute(path: "discover", page: DiscoverView),
