@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
@@ -9,6 +10,7 @@ import '../../core/components/button/button.dart';
 import '../../core/components/notFound/notFound.dart';
 import '../../core/components/text/custom_text.dart';
 import '../../core/extensions/num_extensions.dart';
+import '../../core/init/navigation/routes.gr.dart';
 import 'widget/basket_list_tile.dart';
 
 class BasketView extends StatefulWidget {
@@ -67,7 +69,7 @@ class _BasketViewState extends State<BasketView> {
               },
             )),
         ButtonWidget(
-          onTap: () {},
+          onTap: () => context.router.push(const PaymentRoute()),
           buttonColor: Colors.teal,
           text: "Devam Et",
         )

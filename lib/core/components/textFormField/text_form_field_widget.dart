@@ -4,12 +4,16 @@ import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/app/color_constants.dart';
+import '../../extensions/num_extensions.dart';
+import '../text/custom_text.dart';
 
 class TextFormFieldWidget extends StatefulWidget {
   final String? hintText;
   final bool isPassword;
   final double? width;
   final Function? onSaved;
+  final Function? onChanged;
+
   final String? prefixIconPath;
   final EdgeInsets? contentPadding;
   final Function(String?)? validator;
@@ -42,6 +46,7 @@ class TextFormFieldWidget extends StatefulWidget {
     this.titleFontSize = 12,
     this.isPassword = false,
     this.onSaved,
+    this.onChanged,
     this.initialValue,
     this.prefixIconPath,
     this.textEditingController,
@@ -86,41 +91,54 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
       padding: context.verticalPaddingLow,
       child: SizedBox(
         width: context.dynamicWidth(widget.width!),
-        child: TextFormField(
-          maxLength: widget.maxLength,
-          maxLines: widget.maxLines!,
-          controller: widget.textEditingController,
-          initialValue: widget.initialValue,
-          inputFormatters: widget.inputFormatters,
-          textAlignVertical: TextAlignVertical.center,
-          keyboardType: widget.textInputType,
-          obscureText: _isShowPassword,
-          style: context.textTheme.headline5
-              ?.copyWith(color: ColorConstants.instance?.cadetBlue, fontSize: widget.fontSize!.sp, fontWeight: widget.hintTextFontWeight),
-          decoration: InputDecoration(
-            errorMaxLines: 1,
-            errorStyle: context.textTheme.subtitle2?.copyWith(color: Colors.red),
-            suffix: widget.suffixWidget,
-            prefixIcon: widget.prefixWidget,
-            hintText: widget.hintText,
-            labelText: widget.labelText,
-            prefixIconColor: widget.prefixIconColor,
-            filled: true,
-            fillColor: widget.backgroundColor,
-            isDense: true,
-            hintStyle: context.textTheme.headline5
-                ?.copyWith(color: ColorConstants.instance?.cadetBlue, fontSize: widget.fontSize!.sp, fontWeight: widget.hintTextFontWeight),
-            border: _buildOutlineInputBorder(),
-            focusedErrorBorder: _buildOutlineInputBorder(color: const Color(0xFFFA4F4F)),
-            enabledBorder: _buildOutlineInputBorder(),
-            focusedBorder: _buildOutlineInputBorder(),
-            errorBorder: _buildOutlineInputBorder(color: const Color(0xFFFA4F4F)),
-            disabledBorder: _buildOutlineInputBorder(),
-          ),
-          validator: (value) => widget.validator != null ? widget.validator!(value) : null,
-          onSaved: (value) {
-            widget.onSaved != null ? widget.onSaved!(value) : null;
-          },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomText(
+              widget.title,
+              textStyle: context.textTheme.headline6?.copyWith(fontSize: 12.sp),
+            ),
+            2.h.ph,
+            TextFormField(
+              maxLength: widget.maxLength,
+              maxLines: widget.maxLines!,
+              controller: widget.textEditingController,
+              initialValue: widget.initialValue,
+              inputFormatters: widget.inputFormatters,
+              textAlignVertical: TextAlignVertical.center,
+              keyboardType: widget.textInputType,
+              obscureText: _isShowPassword,
+              style: context.textTheme.headline5
+                  ?.copyWith(color: ColorConstants.instance?.cadetBlue, fontSize: widget.fontSize!.sp, fontWeight: widget.hintTextFontWeight),
+              decoration: InputDecoration(
+                errorMaxLines: 1,
+                errorStyle: context.textTheme.subtitle2?.copyWith(color: Colors.red),
+                suffix: widget.suffixWidget,
+                prefixIcon: widget.prefixWidget,
+                hintText: widget.hintText,
+                labelText: widget.labelText,
+                prefixIconColor: widget.prefixIconColor,
+                filled: true,
+                fillColor: widget.backgroundColor,
+                isDense: true,
+                hintStyle: context.textTheme.headline5
+                    ?.copyWith(color: ColorConstants.instance?.cadetBlue, fontSize: widget.fontSize!.sp, fontWeight: widget.hintTextFontWeight),
+                border: _buildOutlineInputBorder(),
+                focusedErrorBorder: _buildOutlineInputBorder(color: const Color(0xFFFA4F4F)),
+                enabledBorder: _buildOutlineInputBorder(),
+                focusedBorder: _buildOutlineInputBorder(),
+                errorBorder: _buildOutlineInputBorder(color: const Color(0xFFFA4F4F)),
+                disabledBorder: _buildOutlineInputBorder(),
+              ),
+              validator: (value) => widget.validator != null ? widget.validator!(value) : null,
+              onSaved: (value) {
+                widget.onSaved != null ? widget.onSaved!(value) : null;
+              },
+              onChanged: (value) {
+                widget.onChanged != null ? widget.onChanged!(value) : null;
+              },
+            ),
+          ],
         ),
       ),
     );
