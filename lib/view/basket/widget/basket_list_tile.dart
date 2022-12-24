@@ -37,7 +37,7 @@ class _BasketListTileWidgetState extends State<BasketListTileWidget> {
         motion: const BehindMotion(),
         children: [
           InkWell(
-            onTap: () => _bloc.add(RemoveProductFromBasket(widget.productModel.id.toString())),
+            onTap: () => _bloc.add(AddOrRemoveProductFromBasket(widget.productModel.id.toString(), context)),
             child: Container(
               width: context.dynamicWidth(0.3),
               height: MediaQuery.of(context).size.height / 2.5,

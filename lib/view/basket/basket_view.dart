@@ -9,6 +9,7 @@ import '../../core/components/appbar/appbar.dart';
 import '../../core/components/button/button.dart';
 import '../../core/components/notFound/notFound.dart';
 import '../../core/components/text/custom_text.dart';
+import '../../core/constants/app/color_constants.dart';
 import '../../core/extensions/num_extensions.dart';
 import '../../core/init/navigation/routes.gr.dart';
 import 'widget/basket_list_tile.dart';
@@ -27,11 +28,7 @@ class _BasketViewState extends State<BasketView> {
   void initState() {
     _basketBloc = context.read<ProductBloc>();
     _basketBloc.add(FetchAllBasketProducts());
-    _basketBloc.stream.listen((event) {
-      if (event is UpdatedBasket) {
-        _basketBloc.add(FetchAllBasketProducts());
-      }
-    });
+
     super.initState();
   }
 
@@ -39,12 +36,20 @@ class _BasketViewState extends State<BasketView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CustomAppbar(title: "Basket"),
+        const CustomAppbar(title: "Basket", isThereLeading: false),
         2.h.ph,
         SizedBox(
             height: context.dynamicHeight(0.65),
-            child: BlocBuilder<ProductBloc, ProductState>(
+            child: BlocConsumer<ProductBloc, ProductState>(
               bloc: _basketBloc,
+              buildWhen: (previousState, currentState) {
+                return currentState is ProductsLoaded || currentState is ProductsLoading || currentState is ProductLoadError;
+              },
+              listener: (context, state) {
+                if (state is UpdatedBasket) {
+                  _basketBloc.add(FetchAllBasketProducts());
+                }
+              },
               builder: (context, state) {
                 if (state is ProductsLoaded) {
                   return state.productList.isNotEmpty
@@ -60,7 +65,16 @@ class _BasketViewState extends State<BasketView> {
                             );
                           },
                         )
-                      : const NotFoundProductWidget();
+                      : Column(
+                          children: [
+                            const NotFoundProductWidget(),
+                            2.h.ph,
+                            CustomText(
+                              "Sepette Ürün Bulunmamaktadır",
+                              textStyle: context.textTheme.headline6?.copyWith(color: ColorConstants.instance?.mainColor),
+                            ),
+                          ],
+                        );
                 } else if (state is ProductsLoading) {
                   return const Center(child: CircularProgressIndicator());
                 } else {

@@ -42,6 +42,7 @@ class _PaymentViewState extends State<PaymentView> {
                   _cardNumber = value;
                 });
               },
+              maxLength: 16,
               title: "Card Number",
             ),
             TextFormFieldWidget(
@@ -58,6 +59,8 @@ class _PaymentViewState extends State<PaymentView> {
                   _expiryDate = value;
                 });
               },
+              maxLength: 5,
+              textInputType: TextInputType.datetime,
               title: "Expiry Date",
             ),
             TextFormFieldWidget(
@@ -66,6 +69,8 @@ class _PaymentViewState extends State<PaymentView> {
                   _cvv = value;
                 });
               },
+              maxLength: 3,
+              textInputType: TextInputType.number,
               title: "CVV",
             ),
             ButtonWidget(

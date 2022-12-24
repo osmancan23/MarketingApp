@@ -20,7 +20,7 @@ class BaseFunctions {
         : null;
   }
 
-  addOrRemoveProductListLocaleStorage(BuildContext context, {required String key, required String productId}) async {
+ Future<void> addOrRemoveProductListLocaleStorage(BuildContext context, {required String key, required String productId}) async {
     var productList = await LocalStorageManager.getStringList(key);
     if (productList!.contains(productId)) {
       key == "favorites" ? productList.remove(productId) : snackbarWidget(context, message: "Ürün zaten sepetinizde bulunmakta !", isSuccess: false);

@@ -6,15 +6,16 @@ import '../../constants/app/color_constants.dart';
 import '../text/custom_text.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppbar({super.key, this.title, this.actions});
+  const CustomAppbar({super.key, this.title, this.actions, this.isThereLeading = true});
   final String? title;
   final List<Widget>? actions;
+  final bool isThereLeading;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: ColorConstants.instance?.alabaster,
       elevation: 0,
-      leading: _leadinIconButton(context),
+      leading: isThereLeading ? _leadinIconButton(context) : null,
       actions: actions,
       centerTitle: true,
       title: CustomText(

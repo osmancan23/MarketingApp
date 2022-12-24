@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/base/bloc/product_bloc.dart';
-import '../../core/base/service/product_service.dart';
 import '../../core/components/appbar/appbar.dart';
 import '../../core/components/notFound/notFound.dart';
 import '../../core/components/productCard/product_card.dart';
 import '../../core/components/text/custom_text.dart';
+import '../../core/constants/app/color_constants.dart';
 import '../../core/extensions/num_extensions.dart';
-import '../../core/init/network/network_manager.dart';
 
 class FavoritesView extends StatefulWidget {
   const FavoritesView({super.key});
@@ -23,7 +23,7 @@ class _FavoritesViewState extends State<FavoritesView> {
   late ProductBloc _productBloc;
   @override
   void initState() {
-    _productBloc = ProductBloc(ProductService(VexanaManager()));
+    _productBloc = context.read<ProductBloc>();
     _productBloc.add(FetchAllFavoritesProducts());
     super.initState();
   }
@@ -32,12 +32,21 @@ class _FavoritesViewState extends State<FavoritesView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CustomAppbar(title: "Favorites"),
+        const CustomAppbar(title: "Favorites", isThereLeading: false),
         4.h.ph,
-        BlocBuilder<ProductBloc, ProductState>(
+        BlocConsumer<ProductBloc, ProductState>(
           bloc: _productBloc,
+          buildWhen: (previousState, currentState) {
+            return currentState is ProductsLoaded || currentState is ProductsLoading || currentState is ProductLoadError;
+          },
+          listener: (context, state) {
+            if (state is UpdatedBasket) {
+              _productBloc.add(FetchAllFavoritesProducts());
+            }
+          },
           builder: (context, state) {
             if (state is ProductsLoaded) {
+              print(state.productList.length);
               return state.productList.isNotEmpty
                   ? GridView.builder(
                       shrinkWrap: true,
@@ -55,7 +64,16 @@ class _FavoritesViewState extends State<FavoritesView> {
                         return ProductCardWidget(productModel: item);
                       },
                     )
-                  : const NotFoundProductWidget();
+                  : Column(
+                      children: [
+                        const NotFoundProductWidget(),
+                        2.h.ph,
+                        CustomText(
+                          "Favorilerde Ürün Bulunmamaktadır",
+                          textStyle: context.textTheme.headline6?.copyWith(color: ColorConstants.instance?.mainColor),
+                        ),
+                      ],
+                    );
             } else if (state is ProductsLoading) {
               return const Center(child: CircularProgressIndicator());
             } else {

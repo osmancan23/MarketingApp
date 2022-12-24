@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../core/base/bloc/product_bloc.dart';
 import '../../core/components/button/button.dart';
 import '../../core/components/scaffold/scaffold.dart';
 import '../../core/constants/app/color_constants.dart';
@@ -21,11 +23,12 @@ class PaymentResultView extends StatefulWidget {
 
 class _PaymentResultViewState extends State<PaymentResultView> {
   PaymentResultState _paymentResultState = PaymentResultState.loading;
-
+  late ProductBloc _productBloc;
   @override
   void initState() {
+    _productBloc = context.read<ProductBloc>();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 2));
       setState(() {
         _paymentResultState = PaymentResultState.success;
       });
@@ -47,9 +50,12 @@ class _PaymentResultViewState extends State<PaymentResultView> {
             25.h.ph,
             _paymentResultState == PaymentResultState.success
                 ? ButtonWidget(
-                    onTap: () => context.router.replaceAll([
-                      const MainRoute(children: [HomeRoute()])
-                    ]),
+                    onTap: () {
+                      _productBloc.add(ClearBasket());
+                      context.router.replaceAll([
+                        const MainRoute(children: [HomeRoute()])
+                      ]);
+                    },
                     text: "Finish",
                     buttonColor: ColorConstants.instance?.mainColor,
                   )

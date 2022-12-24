@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 
 import '../../init/locale_storage/locale_storage_manager.dart';
+import '../functions/base_functions.dart';
 import '../model/product_model.dart';
 import '../service/i_product_service.dart';
 
@@ -46,10 +47,11 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(ProductsLoading());
         List<ProductModel> products = [];
         var favorites = await LocalStorageManager.getStringList("favorites");
-        favorites?.forEach((element) async {
-          var product = await _productService.fetchProductById(productId: int.parse(element));
+        for (var item in favorites!) {
+          var product = await _productService.fetchProductById(productId: int.parse(item));
           products.add(product);
-        });
+        }
+
         emit(ProductsLoaded(products));
       } catch (e) {
         emit(ProductLoadError(e.toString()));
@@ -61,20 +63,50 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(ProductsLoading());
         List<ProductModel> products = [];
         var favorites = await LocalStorageManager.getStringList("basket");
-        favorites?.forEach((element) async {
-          var product = await _productService.fetchProductById(productId: int.parse(element));
+        for (var item in favorites!) {
+          var product = await _productService.fetchProductById(productId: int.parse(item));
           products.add(product);
-        });
+        }
+
         emit(ProductsLoaded(products));
       } catch (e) {
         emit(ProductLoadError(e.toString()));
       }
     });
-    on<RemoveProductFromBasket>((event, emit) async {
+
+    on<AddOrRemoveProductFromFavorites>((event, emit) async {
       try {
-        var basket = await LocalStorageManager.getStringList("basket");
-        basket!.remove(event.productId);
-        LocalStorageManager.setStringList("basket", basket);
+        emit(UpdatingFavorites());
+        await BaseFunctions.instance?.addOrRemoveProductListLocaleStorage(
+          event.context,
+          key: "favorites",
+          productId: event.productId,
+        );
+        emit(UpdatedFavorites());
+      } catch (e) {
+        emit(UpdateFavoriteError(e.toString()));
+      }
+    });
+
+    on<AddOrRemoveProductFromBasket>((event, emit) async {
+      try {
+        emit(UpdatingBasket());
+
+        await BaseFunctions.instance?.addOrRemoveProductListLocaleStorage(
+          event.context,
+          key: "bakset",
+          productId: event.productId,
+        );
+        emit(UpdatedBasket());
+      } catch (e) {
+        emit(UpdateBasketError(e.toString()));
+      }
+    });
+
+    on<ClearBasket>((event, emit) async {
+      try {
+        emit(UpdatingBasket());
+        await LocalStorageManager.setStringList("basket", []);
         emit(UpdatedBasket());
       } catch (e) {
         emit(UpdateBasketError(e.toString()));

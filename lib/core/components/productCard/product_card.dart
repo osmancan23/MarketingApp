@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../base/bloc/product_bloc.dart';
 import '../../base/functions/base_functions.dart';
 import '../../base/model/product_model.dart';
 import '../../constants/app/color_constants.dart';
@@ -22,9 +24,11 @@ class ProductCardWidget extends StatefulWidget {
 
 class _ProductCardWidgetState extends State<ProductCardWidget> {
   bool isLike = false;
+  late ProductBloc _productBloc;
 
   @override
   void initState() {
+    _productBloc = context.read<ProductBloc>();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       var favorites = await LocalStorageManager.getStringList("favorites");
 
@@ -90,11 +94,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         setState(() {
                           isLike = !isLike;
                         });
-                        BaseFunctions.instance?.addOrRemoveProductListLocaleStorage(
-                          context,
-                          key: "favorites",
-                          productId: widget.productModel!.id.toString(),
-                        );
+                        _productBloc.add(AddOrRemoveProductFromFavorites(widget.productModel!.id.toString(), context));
                       },
                     ),
                   ),

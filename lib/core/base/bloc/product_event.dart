@@ -21,9 +21,18 @@ class FetchAllFavoritesProducts extends ProductEvent {}
 
 class FetchAllBasketProducts extends ProductEvent {}
 
-
-class RemoveProductFromBasket extends ProductEvent{
+class AddOrRemoveProductFromBasket extends ProductEvent {
   final String productId;
+  final BuildContext context;
 
-  RemoveProductFromBasket(this.productId);
+  AddOrRemoveProductFromBasket(this.productId, this.context);
 }
+
+class AddOrRemoveProductFromFavorites extends ProductEvent {
+  final String productId;
+  final BuildContext context;
+
+  AddOrRemoveProductFromFavorites(this.productId, this.context);
+}
+
+class ClearBasket extends ProductEvent {}
