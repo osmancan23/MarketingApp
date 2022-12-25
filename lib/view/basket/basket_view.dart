@@ -53,17 +53,26 @@ class _BasketViewState extends State<BasketView> {
               builder: (context, state) {
                 if (state is ProductsLoaded) {
                   return state.productList.isNotEmpty
-                      ? ListView.builder(
-                          padding: EdgeInsets.zero,
-                          itemCount: state.productList.length,
-                          shrinkWrap: true,
-                          itemBuilder: (BuildContext context, int index) {
-                            var item = state.productList[index];
-                            return Padding(
-                              padding: context.verticalPaddingLow,
-                              child: BasketListTileWidget(productModel: item),
-                            );
-                          },
+                      ? Column(
+                          children: [
+                            ListView.builder(
+                              padding: EdgeInsets.zero,
+                              itemCount: state.productList.length,
+                              shrinkWrap: true,
+                              itemBuilder: (BuildContext context, int index) {
+                                var item = state.productList[index];
+                                return Padding(
+                                  padding: context.verticalPaddingLow,
+                                  child: BasketListTileWidget(productModel: item),
+                                );
+                              },
+                            ),
+                            ButtonWidget(
+                              onTap: () => context.router.push(const PaymentRoute()),
+                              buttonColor: Colors.teal,
+                              text: "Devam Et",
+                            ),
+                          ],
                         )
                       : Column(
                           children: [
@@ -82,11 +91,6 @@ class _BasketViewState extends State<BasketView> {
                 }
               },
             )),
-        ButtonWidget(
-          onTap: () => context.router.push(const PaymentRoute()),
-          buttonColor: Colors.teal,
-          text: "Devam Et",
-        )
       ],
     );
   }

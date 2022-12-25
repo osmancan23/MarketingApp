@@ -47,11 +47,12 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(ProductsLoading());
         List<ProductModel> products = [];
         var favorites = await LocalStorageManager.getStringList("favorites");
-        for (var item in favorites!) {
-          var product = await _productService.fetchProductById(productId: int.parse(item));
-          products.add(product);
+        if (favorites != null) {
+          for (var item in favorites) {
+            var product = await _productService.fetchProductById(productId: int.parse(item));
+            products.add(product);
+          }
         }
-
         emit(ProductsLoaded(products));
       } catch (e) {
         emit(ProductLoadError(e.toString()));
@@ -63,9 +64,11 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(ProductsLoading());
         List<ProductModel> products = [];
         var favorites = await LocalStorageManager.getStringList("basket");
-        for (var item in favorites!) {
-          var product = await _productService.fetchProductById(productId: int.parse(item));
-          products.add(product);
+        if (favorites != null) {
+          for (var item in favorites) {
+            var product = await _productService.fetchProductById(productId: int.parse(item));
+            products.add(product);
+          }
         }
 
         emit(ProductsLoaded(products));

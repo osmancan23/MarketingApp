@@ -32,7 +32,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       var favorites = await LocalStorageManager.getStringList("favorites");
 
-      isLike = favorites!.contains(widget.productModel!.id.toString());
+      isLike = favorites != null ? favorites.contains(widget.productModel!.id.toString()) : false;
       setState(() {});
     });
     super.initState();
