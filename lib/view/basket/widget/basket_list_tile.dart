@@ -6,6 +6,7 @@ import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/base/bloc/product_bloc.dart';
+import '../../../core/base/functions/base_functions.dart';
 import '../../../core/base/model/product_model.dart';
 import '../../../core/components/text/custom_text.dart';
 import '../../../core/constants/app/color_constants.dart';
@@ -49,7 +50,7 @@ class _BasketListTileWidgetState extends State<BasketListTileWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: () => _bloc.add(AddOrRemoveProductFromBasket(widget.productModel.id.toString(), context)),
                     child: const Icon(
                       Icons.delete,
                       color: Colors.white,
@@ -97,7 +98,7 @@ class _BasketListTileWidgetState extends State<BasketListTileWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomText(
-                    widget.productModel.title,
+                    BaseFunctions.instance?.toShortString(widget.productModel.title!, countCharacter: 16),
                     textStyle: context.textTheme.headline6?.copyWith(
                       color: ColorConstants.instance?.mainColor,
                     ),

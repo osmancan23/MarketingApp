@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../core/components/bottomBar/bottom_navbar.dart';
 import '../core/components/scaffold/scaffold.dart';

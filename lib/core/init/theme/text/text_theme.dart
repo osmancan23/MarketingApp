@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../constants/app/color_constants.dart';
+//TODO: SINGLETON DESIGN PATTERN
 
 class AppTextTheme {
   static AppTextTheme? _instance;

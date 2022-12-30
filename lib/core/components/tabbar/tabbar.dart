@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
-import 'package:marketing_app/core/components/text/custom_text.dart';
-import 'package:marketing_app/core/constants/app/color_constants.dart';
 
 import '../../base/state/base_state.dart';
+import '../../constants/app/color_constants.dart';
+import '../text/custom_text.dart';
 
 class TabbarWidget extends StatefulWidget implements PreferredSizeWidget {
   const TabbarWidget({
@@ -69,8 +69,8 @@ class _TabbarWidgetState extends BaseState<TabbarWidget> with SingleTickerProvid
             },
             labelColor: Colors.red,
             unselectedLabelColor: Colors.black,
-            labelStyle: TextStyle(color: Colors.red),
-            unselectedLabelStyle: TextStyle(color: Colors.black),
+            labelStyle: const TextStyle(color: Colors.red),
+            unselectedLabelStyle: const TextStyle(color: Colors.black),
             controller: _tabController,
             indicatorColor: ColorConstants.instance?.mainColor,
             indicatorSize: TabBarIndicatorSize.label,

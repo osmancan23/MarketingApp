@@ -1,3 +1,5 @@
+//TODO: SINGLETON DESIGN PATTERN
+
 class AppConstants {
   static AppConstants? _instance;
   static AppConstants? get instance {

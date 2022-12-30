@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
@@ -37,7 +36,9 @@ class _FavoritesViewState extends State<FavoritesView> {
         BlocConsumer<ProductBloc, ProductState>(
           bloc: _productBloc,
           buildWhen: (previousState, currentState) {
-            return currentState is ProductsLoaded || currentState is ProductsLoading || currentState is ProductLoadError;
+            return currentState is ProductsLoaded ||
+                currentState is ProductsLoading ||
+                currentState is ProductLoadError;
           },
           listener: (context, state) {
             if (state is UpdatedBasket) {
@@ -46,7 +47,6 @@ class _FavoritesViewState extends State<FavoritesView> {
           },
           builder: (context, state) {
             if (state is ProductsLoaded) {
-              print(state.productList.length);
               return state.productList.isNotEmpty
                   ? GridView.builder(
                       shrinkWrap: true,

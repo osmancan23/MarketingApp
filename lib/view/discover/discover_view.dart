@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 import '../../core/extensions/num_extensions.dart';
 import 'widget/category_box.dart';
 
+// ignore: must_be_immutable
 class DiscoverView extends StatelessWidget {
   DiscoverView({super.key});
   List<String> categories = ["Smartphones", "Laptops", "Automotive", "Skincare", "Furniture", "Sunglasses"];

@@ -7,6 +7,7 @@ import 'core/dependcy_injector.dart';
 import 'core/init/navigation/routes.gr.dart';
 
 void main() {
+  // ignore: deprecated_member_use
   BlocOverrides.runZoned(
       () => runApp(
             MultiBlocProvider(

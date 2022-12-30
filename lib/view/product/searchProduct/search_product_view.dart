@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/base/bloc/product_bloc.dart';
+import '../../../core/base/model/product_model.dart';
+import '../../../core/base/service/productFilter/product_filter.dart';
 import '../../../core/base/service/product_service.dart';
 import '../../../core/components/notFound/notFound.dart';
 import '../../../core/components/productCard/product_card.dart';
 import '../../../core/components/scaffold/scaffold.dart';
-import '../../../core/components/text/custom_text.dart';
 import '../../../core/init/network/network_manager.dart';
+import 'producT_display.dart';
 
 class SearchProductView extends StatefulWidget {
   final String word;
@@ -19,12 +19,28 @@ class SearchProductView extends StatefulWidget {
 }
 
 class _SearchProductViewState extends State<SearchProductView> {
-  late ProductBloc _productBloc;
+  //TODO: USED BRIDGE PATTERN DESIGN
 
+  ProductDisplay productDisplay = ProductDisplay(ProductFilter(ProductService(VexanaManager())));
+  List<ProductModel> productList = [];
+  bool isLoading = false;
   @override
   void initState() {
-    _productBloc = ProductBloc(ProductService(VexanaManager()));
-    widget.isCategoryName ? _productBloc.add(FetchProductByCategory(widget.word)) : _productBloc.add(SearchProducts(widget.word));
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      setState(() {
+        isLoading = true;
+      });
+      if (widget.isCategoryName) {
+        productList = await productDisplay.displayCategoryProducts(widget.word);
+      } else {
+        productList = await productDisplay.displaySearchProducts(widget.word);
+      }
+      await Future.delayed(const Duration(seconds: 1));
+      setState(() {
+        isLoading = false;
+      });
+    });
+
     super.initState();
   }
 
@@ -32,31 +48,24 @@ class _SearchProductViewState extends State<SearchProductView> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       appbarTitle: "Search Product",
-      body: BlocBuilder<ProductBloc, ProductState>(
-        bloc: _productBloc,
-        builder: (context, state) {
-          if (state is ProductsLoaded) {
-            return state.productList.isNotEmpty? GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate:
-                  const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisExtent: 230, crossAxisSpacing: 10, mainAxisSpacing: 20),
-              itemCount: state.productList.length,
-              itemBuilder: (BuildContext context, int index) {
-                var item = state.productList[index];
-                // ignore: prefer_const_constructors
-                return ProductCardWidget(
-                  productModel: item,
-                );
-              },
-            ) : const NotFoundProductWidget();
-          } else if (state is ProductsLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            return CustomText(state.toString());
-          }
-        },
-      ),
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : productList.isNotEmpty
+              ? GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, mainAxisExtent: 230, crossAxisSpacing: 10, mainAxisSpacing: 20),
+                  itemCount: productList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    var item = productList[index];
+                    // ignore: prefer_const_constructors
+                    return ProductCardWidget(
+                      productModel: item,
+                    );
+                  },
+                )
+              : const NotFoundProductWidget(),
     );
   }
 }

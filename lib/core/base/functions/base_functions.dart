@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../components/snackbar/snackbar.dart';
 import '../../init/locale_storage/locale_storage_manager.dart';
+
+//TODO: SINGLETON DESIGN PATTERN
 
 class BaseFunctions {
   static BaseFunctions? _instance;
@@ -20,19 +21,18 @@ class BaseFunctions {
         : null;
   }
 
-  Future<void> addOrRemoveProductListLocaleStorage(BuildContext context, {required String key, required String productId}) async {
+  Future<void> addOrRemoveProductListLocaleStorage(BuildContext context,
+      {required String key, required String productId}) async {
     var productList = await LocalStorageManager.getStringList(key);
     if (productList == null) {
       await LocalStorageManager.setStringList(key, []);
     }
 
     if (productList!.contains(productId)) {
-      key == "favorites" ? productList.remove(productId) : snackbarWidget(context, message: "Ürün zaten sepetinizde bulunmakta !", isSuccess: false);
+      key == "favorites" ? productList.remove(productId) : productList.remove(productId);
     } else {
       productList.add(productId);
-      key == "basket" ? snackbarWidget(context, message: "Ürün sepete eklendi ") : null;
     }
     LocalStorageManager.setStringList(key, productList);
-    print(productList.toString());
   }
 }

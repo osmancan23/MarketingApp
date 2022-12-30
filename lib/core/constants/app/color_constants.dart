@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//TODO: SINGLETON DESIGN PATTERN
 
 class ColorConstants {
   static ColorConstants? _instance;

@@ -9,11 +9,35 @@ import '../../../core/components/button/button.dart';
 import '../../../core/components/text/custom_text.dart';
 import '../../../core/constants/app/color_constants.dart';
 import '../../../core/extensions/num_extensions.dart';
+import '../../../core/init/locale_storage/locale_storage_manager.dart';
 import 'widget/image_slider.dart';
 
-class ProductDetailView extends StatelessWidget {
+class ProductDetailView extends StatefulWidget {
   const ProductDetailView({super.key, required this.productModel});
   final ProductModel productModel;
+
+  @override
+  State<ProductDetailView> createState() => _ProductDetailViewState();
+}
+
+class _ProductDetailViewState extends State<ProductDetailView> {
+  bool isSaveBasket = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      var productList = await LocalStorageManager.getStringList("basket");
+      if (productList != null) {
+        isSaveBasket = productList.contains(widget.productModel.id.toString());
+      } else {
+        isSaveBasket = false;
+      }
+      setState(() {});
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +49,7 @@ class ProductDetailView extends StatelessWidget {
             children: [
               5.h.ph,
               ImageSlideWidget(
-                images: productModel.images ?? [],
+                images: widget.productModel.images ?? [],
               ),
               4.h.ph,
               Padding(
@@ -36,7 +60,7 @@ class ProductDetailView extends StatelessWidget {
                     Row(
                       children: [
                         CustomText(
-                          productModel.title,
+                          widget.productModel.title,
                           textStyle: context.textTheme.headline4?.copyWith(color: ColorConstants.instance?.mainColor),
                         ),
                       ],
@@ -47,7 +71,7 @@ class ProductDetailView extends StatelessWidget {
                         SizedBox(
                           width: context.dynamicWidth(0.9),
                           child: CustomText(
-                            productModel.description,
+                            widget.productModel.description,
                             maxLines: 3,
                             textStyle: context.textTheme.headline6?.copyWith(color: ColorConstants.instance?.cadetBlue),
                           ),
@@ -60,8 +84,9 @@ class ProductDetailView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         CustomText(
-                          '\$${productModel.price.toString()}',
-                          textStyle: context.textTheme.headline5?.copyWith(color: ColorConstants.instance?.mainColor, fontWeight: FontWeight.w700),
+                          '\$${widget.productModel.price.toString()}',
+                          textStyle: context.textTheme.headline5
+                              ?.copyWith(color: ColorConstants.instance?.mainColor, fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
@@ -71,13 +96,16 @@ class ProductDetailView extends StatelessWidget {
                       children: [
                         ButtonWidget(
                           onTap: () async {
-                            BaseFunctions.instance?.addOrRemoveProductListLocaleStorage(context,
+                            isSaveBasket = !isSaveBasket;
+                            setState(() {});
+                            BaseFunctions.instance?.addOrRemoveProductListLocaleStorage(
+                              context,
                               key: "basket",
-                              productId: productModel.id.toString(),
+                              productId: widget.productModel.id.toString(),
                             );
                           },
-                          text: "Add To Basket",
-                          buttonColor: ColorConstants.instance?.mainColor,
+                          text: isSaveBasket ? "Remove From Basket" : "Add To Basket",
+                          buttonColor: isSaveBasket ? Colors.red : ColorConstants.instance?.mainColor,
                           width: 0.5,
                         ),
                       ],

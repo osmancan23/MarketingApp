@@ -97,7 +97,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
         await BaseFunctions.instance?.addOrRemoveProductListLocaleStorage(
           event.context,
-          key: "bakset",
+          key: "basket",
           productId: event.productId,
         );
         emit(UpdatedBasket());

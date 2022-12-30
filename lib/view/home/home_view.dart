@@ -7,13 +7,14 @@ import 'package:sizer/sizer.dart';
 
 import '../../core/base/bloc/product_bloc.dart';
 import '../../core/base/service/product_service.dart';
-import '../../core/components/productCard/product_card.dart';
 import '../../core/components/text/custom_text.dart';
 import '../../core/components/textFormField/text_form_field_widget.dart';
 import '../../core/constants/app/color_constants.dart';
 import '../../core/extensions/num_extensions.dart';
 import '../../core/init/navigation/routes.gr.dart';
 import '../../core/init/network/network_manager.dart';
+import '../product/productCollection/product_collection.dart';
+import '../product/productList/product_list.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -23,7 +24,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  TextEditingController _searchKeyController = TextEditingController();
+  final TextEditingController _searchKeyController = TextEditingController();
   late ProductBloc productBloc;
   @override
   void initState() {
@@ -46,7 +47,8 @@ class _HomeViewState extends State<HomeView> {
           children: [
             CustomText(
               "Top Products",
-              textStyle: context.textTheme.headline5?.copyWith(color: ColorConstants.instance?.mainColor, fontWeight: FontWeight.w800),
+              textStyle: context.textTheme.headline5
+                  ?.copyWith(color: ColorConstants.instance?.mainColor, fontWeight: FontWeight.w800),
             ),
           ],
         ),
@@ -68,14 +70,11 @@ class _HomeViewState extends State<HomeView> {
           hintText: "Search Product ...",
           hintTextFontWeight: FontWeight.w700,
           fontSize: 12,
-
-          // isThereShadow: true,
         ),
-        _searchKeyController.text.isEmpty
-            ? IconButton(onPressed: () => context.router.push(const BasketRoute()), icon: const FaIcon(FontAwesomeIcons.cartShopping))
-            : IconButton(
-                onPressed: () => context.router.push(SearchProductRoute(word: _searchKeyController.text)),
-                icon: const FaIcon(FontAwesomeIcons.magnifyingGlass)),
+        IconButton(
+            padding: const EdgeInsets.only(top: 30),
+            onPressed: () => context.router.push(SearchProductRoute(word: _searchKeyController.text)),
+            icon: const FaIcon(FontAwesomeIcons.magnifyingGlass))
       ],
     );
   }
@@ -103,22 +102,8 @@ class _HomeViewState extends State<HomeView> {
         bloc: productBloc,
         builder: (context, state) {
           if (state is ProductsLoaded) {
-            return GridView.builder(
-              padding: context.paddingLow,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisExtent: 230,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 20,
-              ),
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: state.productList.length,
-              itemBuilder: (BuildContext context, int index) {
-                var item = state.productList[index];
-                return ProductCardWidget(productModel: item);
-              },
-            );
+//TODO: USED ITERATOR PATTERN DESIGN
+            return ProductList(ProductCollection(state.productList));
           } else if (state is ProductsLoading) {
             return const Center(child: CircularProgressIndicator());
           } else {

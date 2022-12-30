@@ -1,15 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/base/bloc/product_bloc.dart';
+import '../../core/base/service/i_product_service.dart';
+import '../../core/base/service/product_service.dart';
 import '../../core/components/text/custom_text.dart';
 import '../../core/constants/app/color_constants.dart';
 import '../../core/extensions/num_extensions.dart';
 import '../../core/init/navigation/routes.gr.dart';
+import '../../core/init/network/network_manager.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -19,11 +21,15 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  //TODO: USED PROXY DESIGN PATTERN
   late ProductBloc _productBloc;
-
+  late IProductService _productService;
+  late VexanaManager _vexanaManager;
   @override
   void initState() {
-    _productBloc = context.read<ProductBloc>();
+    _vexanaManager = VexanaManager();
+    _productService = ProductService(_vexanaManager);
+    _productBloc = ProductBloc(_productService);
     _productBloc.add(FetchAllProducts());
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
@@ -47,7 +53,8 @@ class _SplashViewState extends State<SplashView> {
           10.h.ph,
           CustomText(
             "Easy Shopping",
-            textStyle: context.textTheme.headline3?.copyWith(color: ColorConstants.instance?.mainColor, fontWeight: FontWeight.w700),
+            textStyle: context.textTheme.headline3
+                ?.copyWith(color: ColorConstants.instance?.mainColor, fontWeight: FontWeight.w700),
           ),
           28.h.ph,
           CustomText(
