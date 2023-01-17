@@ -43,7 +43,6 @@ class _SearchProductViewState extends State<SearchProductView> {
 
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(

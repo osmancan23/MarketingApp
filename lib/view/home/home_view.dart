@@ -102,7 +102,7 @@ class _HomeViewState extends State<HomeView> {
         bloc: productBloc,
         builder: (context, state) {
           if (state is ProductsLoaded) {
-//TODO: USED ITERATOR PATTERN DESIGN
+          //TODO: USED ITERATOR PATTERN DESIGN
             return ProductList(ProductCollection(state.productList));
           } else if (state is ProductsLoading) {
             return const Center(child: CircularProgressIndicator());

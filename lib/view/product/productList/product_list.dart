@@ -3,7 +3,8 @@ import 'package:kartal/kartal.dart';
 
 import '../../../core/components/productCard/product_card.dart';
 import '../productCollection/product_collection.dart';
-// USED ITERATOR PATTERN DESIGN
+
+//TODO: USED ITERATOR PATTERN DESIGN
 
 class ProductList extends StatelessWidget {
   final ProductCollection _collection;
