@@ -4,4 +4,9 @@ Actually this project is my homework of my design patterns lesson . I had use 4 
 
 ## Screenshots
 
-![My animated logo](assets/images/1.png)
+<img src="assets/images/1.png" width="128"/>
+<img src="assets/images/2.png" width="128"/>
+<img src="assets/images/3.png" width="128"/>
+<img src="assets/images/4.png" width="128"/>
+<img src="assets/images/5.png" width="128"/>
+<img src="assets/images/6.png" width="128"/>
