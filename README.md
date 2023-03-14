@@ -4,4 +4,4 @@ Actually this project is my homework of my design patterns lesson . I had use 4 
 
 ## Screenshots
 
-(assets/images/1.png)
+![My animated logo](assets/images/1.png)
