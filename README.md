@@ -1,16 +1,7 @@
-# marketing_app
+# Marketing App
 
-A new Flutter project.
+Actually this project is my homework of my design patterns lesson . I had use 4 design patterns in this project. Firstyle this project actually like E-commerce app . We can see products , add products to basket or remove of basket , add products to favorites and make pay . I used bloc state management and vexana network manager package.
 
-## Getting Started
+## Screenshots
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+(assets/images/1.png)
