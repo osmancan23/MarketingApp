@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/base/model/product_model.dart';
@@ -9,6 +10,7 @@ import '../../../core/components/scaffold/scaffold.dart';
 import '../../../core/init/network/network_manager.dart';
 import 'producT_display.dart';
 
+@RoutePage()
 class SearchProductView extends StatefulWidget {
   final String word;
   final bool isCategoryName;

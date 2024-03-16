@@ -21,7 +21,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snackbarWidget(BuildCo
     behavior: SnackBarBehavior.floating,
     duration: const Duration(seconds: 2),
     shape: RoundedRectangleBorder(
-      borderRadius: context.lowBorderRadius,
+      borderRadius: context.border.lowBorderRadius,
     ),
     backgroundColor: isSuccess! ? Colors.green : Colors.red,
   ));

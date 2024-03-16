@@ -16,8 +16,8 @@ class ImageSlideWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: context.dynamicWidth(width),
-      height: context.dynamicHeight(height),
+      width: context.sized.dynamicWidth(width),
+      height: context.sized.dynamicHeight(height),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40)),
       ),
@@ -29,7 +29,7 @@ class ImageSlideWidget extends StatelessWidget {
             .map((image) => GestureDetector(
                   onTap: () {},
                   child: ClipRRect(
-                    borderRadius: context.lowBorderRadius,
+                    borderRadius: context.border.lowBorderRadius,
                     child: Image.network(
                       image,
                       fit: BoxFit.fill,

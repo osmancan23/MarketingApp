@@ -40,7 +40,7 @@ class _BasketListTileWidgetState extends State<BasketListTileWidget> {
           InkWell(
             onTap: () => _bloc.add(AddOrRemoveProductFromBasket(widget.productModel.id.toString(), context)),
             child: Container(
-              width: context.dynamicWidth(0.3),
+              width: context.sized.dynamicWidth(0.3),
               height: MediaQuery.of(context).size.height / 2.5,
               decoration: const BoxDecoration(
                 color: Colors.red,
@@ -58,7 +58,7 @@ class _BasketListTileWidgetState extends State<BasketListTileWidget> {
                   ),
                   CustomText(
                     "Sil",
-                    textStyle: context.textTheme.headline6?.copyWith(color: Colors.white),
+                    textStyle: context.general.textTheme.headline6?.copyWith(color: Colors.white),
                   )
                 ],
               ),
@@ -67,8 +67,8 @@ class _BasketListTileWidgetState extends State<BasketListTileWidget> {
         ],
       ),
       child: Container(
-        width: context.dynamicWidth(0.85),
-        height: context.dynamicHeight(0.13),
+        width: context.sized.dynamicWidth(0.85),
+        height: context.sized.dynamicHeight(0.13),
         decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [
@@ -79,13 +79,13 @@ class _BasketListTileWidgetState extends State<BasketListTileWidget> {
                 offset: const Offset(0, 3), // changes position of shadow
               ),
             ],
-            borderRadius: context.lowBorderRadius),
+            borderRadius: context.border.lowBorderRadius),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Row(
             children: [
               2.w.pw,
               ClipRRect(
-                borderRadius: context.lowBorderRadius,
+                borderRadius: context.border.lowBorderRadius,
                 child: Image.network(
                   widget.productModel.images!.first,
                   width: 100,
@@ -99,14 +99,14 @@ class _BasketListTileWidgetState extends State<BasketListTileWidget> {
                 children: [
                   CustomText(
                     BaseFunctions.instance?.toShortString(widget.productModel.title!, countCharacter: 16),
-                    textStyle: context.textTheme.headline6?.copyWith(
+                    textStyle: context.general.textTheme.headline6?.copyWith(
                       color: ColorConstants.instance?.mainColor,
                     ),
                   ),
                   2.h.ph,
                   CustomText(
                     "\$ ${widget.productModel.price}",
-                    textStyle: context.textTheme.headline6?.copyWith(
+                    textStyle: context.general.textTheme.headline6?.copyWith(
                       color: ColorConstants.instance?.mainColor,
                     ),
                   ),

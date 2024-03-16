@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:marketing_app/core/init/navigation/routes.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/base/bloc/product_bloc.dart';
@@ -9,10 +10,10 @@ import '../../core/components/button/button.dart';
 import '../../core/components/scaffold/scaffold.dart';
 import '../../core/constants/app/color_constants.dart';
 import '../../core/extensions/num_extensions.dart';
-import '../../core/init/navigation/routes.gr.dart';
 
 enum PaymentResultState { loading, success }
 
+@RoutePage()
 class PaymentResultView extends StatefulWidget {
   const PaymentResultView({super.key});
 

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
+import 'package:marketing_app/core/init/navigation/routes.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../base/bloc/product_bloc.dart';
@@ -10,7 +11,6 @@ import '../../base/model/product_model.dart';
 import '../../constants/app/color_constants.dart';
 import '../../extensions/num_extensions.dart';
 import '../../init/locale_storage/locale_storage_manager.dart';
-import '../../init/navigation/routes.gr.dart';
 import '../text/custom_text.dart';
 
 class ProductCardWidget extends StatefulWidget {
@@ -45,7 +45,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: context.lowBorderRadius,
+          borderRadius: context.border.lowBorderRadius,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -61,10 +61,10 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
             Stack(
               children: [
                 SizedBox(
-                  width: context.dynamicWidth(0.7),
+                  width: context.sized.dynamicWidth(0.7),
                   height: 15.h + 20,
                   child: ClipRRect(
-                    borderRadius: context.lowBorderRadius,
+                    borderRadius: context.border.lowBorderRadius,
                     child: Image.network(
                       widget.productModel!.images!.first,
                       fit: BoxFit.fill,
@@ -104,7 +104,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
             1.h.ph,
             CustomText(
               BaseFunctions.instance?.toShortString(widget.productModel?.title!, countCharacter: 16),
-              textStyle: context.textTheme.headline6!.copyWith(
+              textStyle: context.general.textTheme.titleMedium!.copyWith(
                 color: ColorConstants.instance?.mainColor,
                 fontWeight: FontWeight.w500,
               ),
@@ -113,7 +113,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
             0.1.h.ph,
             CustomText(
               '\$${widget.productModel?.price}',
-              textStyle: context.textTheme.headline6?.copyWith(color: ColorConstants.instance?.mainColor),
+              textStyle: context.general.textTheme.headline6?.copyWith(color: ColorConstants.instance?.mainColor),
             ),
             0.1.h.ph,
           ],

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
+import 'package:marketing_app/core/init/navigation/routes.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/base/bloc/product_bloc.dart';
@@ -11,9 +12,9 @@ import '../../core/components/notFound/notFound.dart';
 import '../../core/components/text/custom_text.dart';
 import '../../core/constants/app/color_constants.dart';
 import '../../core/extensions/num_extensions.dart';
-import '../../core/init/navigation/routes.gr.dart';
 import 'widget/basket_list_tile.dart';
 
+@RoutePage()
 class BasketView extends StatefulWidget {
   const BasketView({super.key});
 
@@ -39,7 +40,7 @@ class _BasketViewState extends State<BasketView> {
         const CustomAppbar(title: "Basket", isThereLeading: false),
         2.h.ph,
         SizedBox(
-            height: context.dynamicHeight(0.65),
+            height: context.sized.dynamicHeight(0.65),
             child: BlocConsumer<ProductBloc, ProductState>(
               bloc: _basketBloc,
               buildWhen: (previousState, currentState) {
@@ -62,7 +63,7 @@ class _BasketViewState extends State<BasketView> {
                               itemBuilder: (BuildContext context, int index) {
                                 var item = state.productList[index];
                                 return Padding(
-                                  padding: context.verticalPaddingLow,
+                                  padding: context.padding.verticalLow,
                                   child: BasketListTileWidget(productModel: item),
                                 );
                               },
@@ -80,7 +81,7 @@ class _BasketViewState extends State<BasketView> {
                             2.h.ph,
                             CustomText(
                               "Sepette Ürün Bulunmamaktadır",
-                              textStyle: context.textTheme.headline6?.copyWith(color: ColorConstants.instance?.mainColor),
+                              textStyle: context.general.textTheme.headline6?.copyWith(color: ColorConstants.instance?.mainColor),
                             ),
                           ],
                         );

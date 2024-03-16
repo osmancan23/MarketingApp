@@ -57,8 +57,8 @@ class _TabbarWidgetState extends BaseState<TabbarWidget> with SingleTickerProvid
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: context.dynamicWidth(1),
-      height: context.dynamicHeight(0.1),
+      width: context.sized.dynamicWidth(1),
+      height: context.sized.dynamicHeight(0.1),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Center(
@@ -83,7 +83,7 @@ class _TabbarWidgetState extends BaseState<TabbarWidget> with SingleTickerProvid
   }
 
   CustomText _itemText(String text) => CustomText(
-        text.toCapitalized(),
-        textStyle: context.textTheme.subtitle1?.copyWith(color: ColorConstants.instance?.cadetBlue),
+        text.ext.toCapitalized(),
+        textStyle: context.general.textTheme.subtitle1?.copyWith(color: ColorConstants.instance?.cadetBlue),
       );
 }

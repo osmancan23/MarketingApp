@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
@@ -12,6 +13,7 @@ import '../../../core/extensions/num_extensions.dart';
 import '../../../core/init/locale_storage/locale_storage_manager.dart';
 import 'widget/image_slider.dart';
 
+@RoutePage()
 class ProductDetailView extends StatefulWidget {
   const ProductDetailView({super.key, required this.productModel});
   final ProductModel productModel;
@@ -43,8 +45,8 @@ class _ProductDetailViewState extends State<ProductDetailView> {
     return Scaffold(
         appBar: const CustomAppbar(title: "Product Detail"),
         body: SizedBox(
-          width: context.dynamicWidth(1),
-          height: context.dynamicHeight(1),
+          width: context.sized.dynamicWidth(1),
+          height: context.sized.dynamicHeight(1),
           child: Column(
             children: [
               5.h.ph,
@@ -53,7 +55,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
               ),
               4.h.ph,
               Padding(
-                padding: context.paddingNormal,
+                padding: context.padding.normal,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -61,7 +63,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                       children: [
                         CustomText(
                           widget.productModel.title,
-                          textStyle: context.textTheme.headline4?.copyWith(color: ColorConstants.instance?.mainColor),
+                          textStyle: context.general.textTheme.headline4?.copyWith(color: ColorConstants.instance?.mainColor),
                         ),
                       ],
                     ),
@@ -69,11 +71,11 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                     Row(
                       children: [
                         SizedBox(
-                          width: context.dynamicWidth(0.9),
+                          width: context.sized.dynamicWidth(0.9),
                           child: CustomText(
                             widget.productModel.description,
                             maxLines: 3,
-                            textStyle: context.textTheme.headline6?.copyWith(color: ColorConstants.instance?.cadetBlue),
+                            textStyle: context.general.textTheme.headline6?.copyWith(color: ColorConstants.instance?.cadetBlue),
                           ),
                         ),
                       ],
@@ -85,7 +87,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                       children: [
                         CustomText(
                           '\$${widget.productModel.price.toString()}',
-                          textStyle: context.textTheme.headline5
+                          textStyle: context.general.textTheme.headline5
                               ?.copyWith(color: ColorConstants.instance?.mainColor, fontWeight: FontWeight.w700),
                         ),
                       ],
