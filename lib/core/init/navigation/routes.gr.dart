@@ -1,204 +1,267 @@
-// **************************************************************************
-// AutoRouteGenerator
-// **************************************************************************
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// AutoRouteGenerator
+// AutoRouterGenerator
 // **************************************************************************
-//
+
 // ignore_for_file: type=lint
+// coverage:ignore-file
 
-// ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i11;
-import 'package:flutter/material.dart' as _i12;
+part of 'routes.dart';
 
-import '../../../view/basket/basket_view.dart' as _i8;
-import '../../../view/discover/discover_view.dart' as _i9;
-import '../../../view/favorites/favorites_view.dart' as _i10;
-import '../../../view/home/home_view.dart' as _i7;
-import '../../../view/main_view.dart' as _i2;
-import '../../../view/payment/payment_result_view.dart' as _i6;
-import '../../../view/payment/payment_view.dart' as _i5;
-import '../../../view/product/productDetail/product_detail_view.dart' as _i4;
-import '../../../view/product/searchProduct/search_product_view.dart' as _i3;
-import '../../../view/splash/splash_view.dart' as _i1;
-import '../../base/model/product_model.dart' as _i13;
-
-class AppRouter extends _i11.RootStackRouter {
-  AppRouter([_i12.GlobalKey<_i12.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+abstract class _$AppRouter extends RootStackRouter {
+  // ignore: unused_element
+  _$AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i11.PageFactory> pagesMap = {
-    SplashRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+  final Map<String, PageFactory> pagesMap = {
+    BasketRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.SplashView(),
+        child: const BasketView(),
+      );
+    },
+    DiscoverRoute.name: (routeData) {
+      final args = routeData.argsAs<DiscoverRouteArgs>(
+          orElse: () => const DiscoverRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: DiscoverView(key: args.key),
+      );
+    },
+    FavoritesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FavoritesView(),
+      );
+    },
+    HomeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HomeView(),
       );
     },
     MainRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.MainView(),
+        child: const MainView(),
+      );
+    },
+    PaymentResultRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PaymentResultView(),
+      );
+    },
+    PaymentRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PaymentView(),
+      );
+    },
+    ProductDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<ProductDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ProductDetailView(
+          key: args.key,
+          productModel: args.productModel,
+        ),
       );
     },
     SearchProductRoute.name: (routeData) {
       final args = routeData.argsAs<SearchProductRouteArgs>();
-      return _i11.MaterialPageX<dynamic>(
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i3.SearchProductView(
+        child: SearchProductView(
           key: args.key,
           word: args.word,
           isCategoryName: args.isCategoryName,
         ),
       );
     },
-    ProductDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<ProductDetailRouteArgs>();
-      return _i11.MaterialPageX<dynamic>(
+    SplashRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i4.ProductDetailView(
-          key: args.key,
-          productModel: args.productModel,
-        ),
-      );
-    },
-    PaymentRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i5.PaymentView(),
-      );
-    },
-    PaymentResultRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i6.PaymentResultView(),
-      );
-    },
-    HomeRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i7.HomeView(),
-      );
-    },
-    BasketRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i8.BasketView(),
-      );
-    },
-    DiscoverRoute.name: (routeData) {
-      final args = routeData.argsAs<DiscoverRouteArgs>(
-          orElse: () => const DiscoverRouteArgs());
-      return _i11.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: _i9.DiscoverView(key: args.key),
-      );
-    },
-    FavoritesRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i10.FavoritesView(),
+        child: const SplashView(),
       );
     },
   };
-
-  @override
-  List<_i11.RouteConfig> get routes => [
-        _i11.RouteConfig(
-          SplashRoute.name,
-          path: '/',
-        ),
-        _i11.RouteConfig(
-          MainRoute.name,
-          path: '',
-          children: [
-            _i11.RouteConfig(
-              HomeRoute.name,
-              path: 'home',
-              parent: MainRoute.name,
-            ),
-            _i11.RouteConfig(
-              BasketRoute.name,
-              path: 'basket',
-              parent: MainRoute.name,
-            ),
-            _i11.RouteConfig(
-              DiscoverRoute.name,
-              path: 'discover',
-              parent: MainRoute.name,
-            ),
-            _i11.RouteConfig(
-              FavoritesRoute.name,
-              path: 'favorites',
-              parent: MainRoute.name,
-            ),
-          ],
-        ),
-        _i11.RouteConfig(
-          SearchProductRoute.name,
-          path: 'search',
-        ),
-        _i11.RouteConfig(
-          ProductDetailRoute.name,
-          path: 'product-detail',
-        ),
-        _i11.RouteConfig(
-          PaymentRoute.name,
-          path: 'payment',
-        ),
-        _i11.RouteConfig(
-          PaymentResultRoute.name,
-          path: 'payment-result',
-        ),
-      ];
 }
 
 /// generated route for
-/// [_i1.SplashView]
-class SplashRoute extends _i11.PageRouteInfo<void> {
-  const SplashRoute()
+/// [BasketView]
+class BasketRoute extends PageRouteInfo<void> {
+  const BasketRoute({List<PageRouteInfo>? children})
       : super(
-          SplashRoute.name,
-          path: '/',
+          BasketRoute.name,
+          initialChildren: children,
         );
 
-  static const String name = 'SplashRoute';
+  static const String name = 'BasketRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i2.MainView]
-class MainRoute extends _i11.PageRouteInfo<void> {
-  const MainRoute({List<_i11.PageRouteInfo>? children})
+/// [DiscoverView]
+class DiscoverRoute extends PageRouteInfo<DiscoverRouteArgs> {
+  DiscoverRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DiscoverRoute.name,
+          args: DiscoverRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'DiscoverRoute';
+
+  static const PageInfo<DiscoverRouteArgs> page =
+      PageInfo<DiscoverRouteArgs>(name);
+}
+
+class DiscoverRouteArgs {
+  const DiscoverRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DiscoverRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [FavoritesView]
+class FavoritesRoute extends PageRouteInfo<void> {
+  const FavoritesRoute({List<PageRouteInfo>? children})
+      : super(
+          FavoritesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FavoritesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [HomeView]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
+      : super(
+          HomeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MainView]
+class MainRoute extends PageRouteInfo<void> {
+  const MainRoute({List<PageRouteInfo>? children})
       : super(
           MainRoute.name,
-          path: '',
           initialChildren: children,
         );
 
   static const String name = 'MainRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i3.SearchProductView]
-class SearchProductRoute extends _i11.PageRouteInfo<SearchProductRouteArgs> {
+/// [PaymentResultView]
+class PaymentResultRoute extends PageRouteInfo<void> {
+  const PaymentResultRoute({List<PageRouteInfo>? children})
+      : super(
+          PaymentResultRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PaymentResultRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PaymentView]
+class PaymentRoute extends PageRouteInfo<void> {
+  const PaymentRoute({List<PageRouteInfo>? children})
+      : super(
+          PaymentRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PaymentRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProductDetailView]
+class ProductDetailRoute extends PageRouteInfo<ProductDetailRouteArgs> {
+  ProductDetailRoute({
+    Key? key,
+    required ProductModel productModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ProductDetailRoute.name,
+          args: ProductDetailRouteArgs(
+            key: key,
+            productModel: productModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ProductDetailRoute';
+
+  static const PageInfo<ProductDetailRouteArgs> page =
+      PageInfo<ProductDetailRouteArgs>(name);
+}
+
+class ProductDetailRouteArgs {
+  const ProductDetailRouteArgs({
+    this.key,
+    required this.productModel,
+  });
+
+  final Key? key;
+
+  final ProductModel productModel;
+
+  @override
+  String toString() {
+    return 'ProductDetailRouteArgs{key: $key, productModel: $productModel}';
+  }
+}
+
+/// generated route for
+/// [SearchProductView]
+class SearchProductRoute extends PageRouteInfo<SearchProductRouteArgs> {
   SearchProductRoute({
-    _i12.Key? key,
+    Key? key,
     required String word,
     bool isCategoryName = false,
+    List<PageRouteInfo>? children,
   }) : super(
           SearchProductRoute.name,
-          path: 'search',
           args: SearchProductRouteArgs(
             key: key,
             word: word,
             isCategoryName: isCategoryName,
           ),
+          initialChildren: children,
         );
 
   static const String name = 'SearchProductRoute';
+
+  static const PageInfo<SearchProductRouteArgs> page =
+      PageInfo<SearchProductRouteArgs>(name);
 }
 
 class SearchProductRouteArgs {
@@ -208,7 +271,7 @@ class SearchProductRouteArgs {
     this.isCategoryName = false,
   });
 
-  final _i12.Key? key;
+  final Key? key;
 
   final String word;
 
@@ -221,119 +284,15 @@ class SearchProductRouteArgs {
 }
 
 /// generated route for
-/// [_i4.ProductDetailView]
-class ProductDetailRoute extends _i11.PageRouteInfo<ProductDetailRouteArgs> {
-  ProductDetailRoute({
-    _i12.Key? key,
-    required _i13.ProductModel productModel,
-  }) : super(
-          ProductDetailRoute.name,
-          path: 'product-detail',
-          args: ProductDetailRouteArgs(
-            key: key,
-            productModel: productModel,
-          ),
-        );
-
-  static const String name = 'ProductDetailRoute';
-}
-
-class ProductDetailRouteArgs {
-  const ProductDetailRouteArgs({
-    this.key,
-    required this.productModel,
-  });
-
-  final _i12.Key? key;
-
-  final _i13.ProductModel productModel;
-
-  @override
-  String toString() {
-    return 'ProductDetailRouteArgs{key: $key, productModel: $productModel}';
-  }
-}
-
-/// generated route for
-/// [_i5.PaymentView]
-class PaymentRoute extends _i11.PageRouteInfo<void> {
-  const PaymentRoute()
+/// [SplashView]
+class SplashRoute extends PageRouteInfo<void> {
+  const SplashRoute({List<PageRouteInfo>? children})
       : super(
-          PaymentRoute.name,
-          path: 'payment',
+          SplashRoute.name,
+          initialChildren: children,
         );
 
-  static const String name = 'PaymentRoute';
-}
+  static const String name = 'SplashRoute';
 
-/// generated route for
-/// [_i6.PaymentResultView]
-class PaymentResultRoute extends _i11.PageRouteInfo<void> {
-  const PaymentResultRoute()
-      : super(
-          PaymentResultRoute.name,
-          path: 'payment-result',
-        );
-
-  static const String name = 'PaymentResultRoute';
-}
-
-/// generated route for
-/// [_i7.HomeView]
-class HomeRoute extends _i11.PageRouteInfo<void> {
-  const HomeRoute()
-      : super(
-          HomeRoute.name,
-          path: 'home',
-        );
-
-  static const String name = 'HomeRoute';
-}
-
-/// generated route for
-/// [_i8.BasketView]
-class BasketRoute extends _i11.PageRouteInfo<void> {
-  const BasketRoute()
-      : super(
-          BasketRoute.name,
-          path: 'basket',
-        );
-
-  static const String name = 'BasketRoute';
-}
-
-/// generated route for
-/// [_i9.DiscoverView]
-class DiscoverRoute extends _i11.PageRouteInfo<DiscoverRouteArgs> {
-  DiscoverRoute({_i12.Key? key})
-      : super(
-          DiscoverRoute.name,
-          path: 'discover',
-          args: DiscoverRouteArgs(key: key),
-        );
-
-  static const String name = 'DiscoverRoute';
-}
-
-class DiscoverRouteArgs {
-  const DiscoverRouteArgs({this.key});
-
-  final _i12.Key? key;
-
-  @override
-  String toString() {
-    return 'DiscoverRouteArgs{key: $key}';
-  }
-}
-
-/// generated route for
-/// [_i10.FavoritesView]
-class FavoritesRoute extends _i11.PageRouteInfo<void> {
-  const FavoritesRoute()
-      : super(
-          FavoritesRoute.name,
-          path: 'favorites',
-        );
-
-  static const String name = 'FavoritesRoute';
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

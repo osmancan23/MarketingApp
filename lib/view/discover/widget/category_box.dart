@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:lottie/lottie.dart';
+import 'package:marketing_app/core/init/navigation/routes.dart';
 
 import '../../../core/components/text/custom_text.dart';
 import '../../../core/constants/app/color_constants.dart';
-import '../../../core/init/navigation/routes.gr.dart';
 
 class CategoryBoxWidget extends StatelessWidget {
   const CategoryBoxWidget({super.key, required this.name});
@@ -17,11 +17,11 @@ class CategoryBoxWidget extends StatelessWidget {
       onTap: () => context.router.push(SearchProductRoute(word: name.toLowerCase(), isCategoryName: true)),
       child: Center(
         child: Container(
-            width: context.dynamicWidth(0.9),
-            height: context.dynamicHeight(0.15),
+            width: context.sized.dynamicWidth(0.9),
+            height: context.sized.dynamicHeight(0.15),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: context.lowBorderRadius,
+              borderRadius: context.border.lowBorderRadius,
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.2),
@@ -32,13 +32,13 @@ class CategoryBoxWidget extends StatelessWidget {
               ],
             ),
             child: Padding(
-              padding: context.paddingLow,
+              padding: context.padding.low,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
                     name,
-                    textStyle: context.textTheme.headline6?.copyWith(color: ColorConstants.instance?.mainColor),
+                    textStyle: context.general.textTheme.headline6?.copyWith(color: ColorConstants.instance?.mainColor),
                   ),
                   SizedBox(
                     width: 150,

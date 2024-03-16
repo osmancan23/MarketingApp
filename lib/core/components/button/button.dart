@@ -52,18 +52,18 @@ class ButtonWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(isTherePadding == true ? 8.0 : 2),
       child: Container(
-        height: context.dynamicHeight(height!),
-        width: context.dynamicWidth(width!),
+        height: context.sized.dynamicHeight(height!),
+        width: context.sized.dynamicWidth(width!),
         decoration: BoxDecoration(
           color: buttonColor ?? ColorConstants.instance?.mainColor,
-          borderRadius: BorderRadius.circular(context.dynamicWidth(radius!)),
+          borderRadius: BorderRadius.circular(context.sized.dynamicWidth(radius!)),
         ),
         child: ElevatedButton(
           style: ButtonStyle(
             side: MaterialStateProperty.all<BorderSide>(BorderSide(color: borderColor ?? Colors.transparent, width: 0.2)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(context.dynamicWidth(radius!)),
+                borderRadius: BorderRadius.circular(context.sized.dynamicWidth(radius!)),
               ),
             ),
             elevation: MaterialStateProperty.all<double>(0.5),
@@ -77,7 +77,7 @@ class ButtonWidget extends StatelessWidget {
           child: Center(
             child: CustomText(
               text!,
-              textStyle: context.textTheme.headline5?.copyWith(color: textColor, fontSize: fontSize?.sp, fontWeight: fontWeight),
+              textStyle: context.general.textTheme.headline5?.copyWith(color: textColor, fontSize: fontSize?.sp, fontWeight: fontWeight),
             ),
           ),
         ),

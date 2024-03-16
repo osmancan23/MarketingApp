@@ -22,7 +22,7 @@ class ProductList extends StatelessWidget {
       ));
     }
     return GridView.builder(
-      padding: context.paddingLow,
+      padding: context.padding.low,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisExtent: 230,

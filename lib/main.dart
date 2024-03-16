@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketing_app/core/init/navigation/routes.dart';
 import 'package:sizer/sizer.dart';
 
 import 'core/base/bloc/bloc_observer.dart';
 import 'core/dependcy_injector.dart';
-import 'core/init/navigation/routes.gr.dart';
 
 void main() {
   // ignore: deprecated_member_use

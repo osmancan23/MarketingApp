@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kartal/kartal.dart';
+import 'package:marketing_app/core/init/navigation/routes.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/base/bloc/product_bloc.dart';
@@ -11,11 +12,11 @@ import '../../core/components/text/custom_text.dart';
 import '../../core/components/textFormField/text_form_field_widget.dart';
 import '../../core/constants/app/color_constants.dart';
 import '../../core/extensions/num_extensions.dart';
-import '../../core/init/navigation/routes.gr.dart';
 import '../../core/init/network/network_manager.dart';
 import '../product/productCollection/product_collection.dart';
 import '../product/productList/product_list.dart';
 
+@RoutePage()
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
@@ -47,7 +48,7 @@ class _HomeViewState extends State<HomeView> {
           children: [
             CustomText(
               "Top Products",
-              textStyle: context.textTheme.headline5
+              textStyle: context.general.textTheme.headline5
                   ?.copyWith(color: ColorConstants.instance?.mainColor, fontWeight: FontWeight.w800),
             ),
           ],
@@ -82,7 +83,7 @@ class _HomeViewState extends State<HomeView> {
 /*
   SizedBox _productListView(BuildContext context) {
     return SizedBox(
-      height: context.dynamicHeight(0.15),
+      height: context.sized.dynamicHeight(0.15),
       child: ListView.builder(
         itemCount: 5,
         shrinkWrap: true,
@@ -97,7 +98,7 @@ class _HomeViewState extends State<HomeView> {
   Widget _productGridView(BuildContext context) {
     return Container(
       color: Colors.transparent,
-      width: context.dynamicWidth(1),
+      width: context.sized.dynamicWidth(1),
       child: BlocBuilder<ProductBloc, ProductState>(
         bloc: productBloc,
         builder: (context, state) {

@@ -15,7 +15,7 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoSizeText(
       text ?? "",
-      style: textStyle ?? context.textTheme.headline6?.copyWith(fontWeight: FontWeight.normal),
+      style: textStyle ?? context.general.textTheme.headline6?.copyWith(fontWeight: FontWeight.normal),
       textAlign: textAlign,
       maxLines: maxLines,
       maxFontSize: maxFontSize ?? double.infinity,

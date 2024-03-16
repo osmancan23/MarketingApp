@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
@@ -11,6 +12,7 @@ import '../../core/components/text/custom_text.dart';
 import '../../core/constants/app/color_constants.dart';
 import '../../core/extensions/num_extensions.dart';
 
+@RoutePage()
 class FavoritesView extends StatefulWidget {
   const FavoritesView({super.key});
 
@@ -70,7 +72,7 @@ class _FavoritesViewState extends State<FavoritesView> {
                         2.h.ph,
                         CustomText(
                           "Favorilerde Ürün Bulunmamaktadır",
-                          textStyle: context.textTheme.headline6?.copyWith(color: ColorConstants.instance?.mainColor),
+                          textStyle: context.general.textTheme.headline6?.copyWith(color: ColorConstants.instance?.mainColor),
                         ),
                       ],
                     );

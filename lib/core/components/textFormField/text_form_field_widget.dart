@@ -88,15 +88,15 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: context.verticalPaddingLow,
+      padding: context.padding.verticalLow,
       child: SizedBox(
-        width: context.dynamicWidth(widget.width!),
+        width: context.sized.dynamicWidth(widget.width!),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomText(
               widget.title,
-              textStyle: context.textTheme.headline6?.copyWith(fontSize: 12.sp),
+              textStyle: context.general.textTheme.headline6?.copyWith(fontSize: 12.sp),
             ),
             2.h.ph,
             TextFormField(
@@ -108,11 +108,11 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
               textAlignVertical: TextAlignVertical.center,
               keyboardType: widget.textInputType,
               obscureText: _isShowPassword,
-              style: context.textTheme.headline5
+              style: context.general.textTheme.headline5
                   ?.copyWith(color: ColorConstants.instance?.cadetBlue, fontSize: widget.fontSize!.sp, fontWeight: widget.hintTextFontWeight),
               decoration: InputDecoration(
                 errorMaxLines: 1,
-                errorStyle: context.textTheme.subtitle2?.copyWith(color: Colors.red),
+                errorStyle: context.general.textTheme.subtitle2?.copyWith(color: Colors.red),
                 suffix: widget.suffixWidget,
                 prefixIcon: widget.prefixWidget,
                 hintText: widget.hintText,
@@ -121,7 +121,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
                 filled: true,
                 fillColor: widget.backgroundColor,
                 isDense: true,
-                hintStyle: context.textTheme.headline5
+                hintStyle: context.general.textTheme.headline5
                     ?.copyWith(color: ColorConstants.instance?.cadetBlue, fontSize: widget.fontSize!.sp, fontWeight: widget.hintTextFontWeight),
                 border: _buildOutlineInputBorder(),
                 focusedErrorBorder: _buildOutlineInputBorder(color: const Color(0xFFFA4F4F)),

@@ -1,14 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_credit_card/credit_card_widget.dart';
+import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:marketing_app/core/init/navigation/routes.dart';
 
 import '../../core/components/button/button.dart';
 import '../../core/components/scaffold/scaffold.dart';
 import '../../core/components/textFormField/text_form_field_widget.dart';
 import '../../core/components/textFormField/validate_operations.dart';
 import '../../core/constants/app/color_constants.dart';
-import '../../core/init/navigation/routes.gr.dart';
 
+@RoutePage()
 class PaymentView extends StatefulWidget {
   const PaymentView({Key? key}) : super(key: key);
 
